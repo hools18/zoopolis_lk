@@ -1,0 +1,37 @@
+<template>
+    <div class="page">
+        <div class="page-content">
+			<div class="head"></div>
+		</div>
+    </div>
+</template>
+<script>
+
+export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onMounted, $onBeforeUpdate, $onUpdated, $onBeforeUnmount, $onUnmounted, $store }) => {
+	$on("pageInit", function (e, page) {
+
+	});
+	$on('pageAfterIn', function (e, page) {
+        if($f7.form.getFormData('token')){
+            $store.dispatch('checkToken').then(function(checkToken) {
+                console.log($store.state.profile)
+                if(!$store.state.profile.hasSubscribe) {
+                    $f7router.navigate({
+                        name: 'select_city'
+                    });
+                } else {
+                    $f7router.navigate({
+                        name: 'main'
+                    });
+                }
+            });
+		} else {
+			$f7router.navigate({
+				name: 'login'
+			});
+		}
+    });
+
+    return $render;
+}
+</script>

@@ -1,0 +1,127 @@
+<template>
+    <div class="page auth">
+		<!-- <a href="/" class="closeToHome"><img src="assets/icon_close.svg"/></a> -->
+        <div class="page-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-100 small-100 medium-100 large-100 xlarge-100">
+						<h1 class="headForm">Вход</h1>
+					</div>
+					<div class="col-100 small-100 medium-100 large-100 xlarge-100">
+						<form class="dataForm" id="login" name="login">
+							<div>
+								<label data-err="${login.login}">
+									<input id="login-mask-login" class="input phoneinput" name="login" type="text" placeholder="Номер телефона" required/>
+								</label>
+							</div>
+							<div>
+								<input type="checkbox" id="show-password" class="show-password" checked/>
+								<label for="show-password" class="show_eye">
+									<img src="assets/icon_eye.svg"/>
+								</label>
+								<label data-err="${login.password}">
+									<input id="password" class="input" name="password" type="text" placeholder="Пароль" required/>
+								</label>
+							</div>
+							<div>
+								<a href="/recovery" class="recovery">Забыли пароль?</a>
+							</div>
+							<div class="mtop">
+								<a href="#" class="button button-outline button-round" @click=${userLogin}>Войти</a>
+							</div>
+							
+							<div class="mtop">
+								<a href="/signup" class="link button button-outline button-round">Создать аккаунт</a>
+							</div>
+						</form>	
+					</div>
+				</div>
+			</div>		
+        </div>
+    </div>
+</template>
+
+<script>
+export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onMounted, $onBeforeUpdate, $onUpdated, $onBeforeUnmount, $onUnmounted, $store, $context}) => {
+	let userCreateError = {};
+	let userUserLogin = {};
+	let login = {};
+	let numberPatterns = [
+		'+375 NN NNN-NN-NN',
+		'+7 (NNN) NNN-NN-NN',  // Россия и Казахстан
+		
+	];
+	function userLogin(){
+		valid = true;
+		formData = $f7.form.convertToData('#login');
+		let fixLogin = formData.login;
+		formData.login = fixLogin.replace(/\D/g,'');
+		
+		if(formData.login.length <= 10 ){
+			valid = false;
+			login['login'] = 'Неверный формат номера телефона';
+			$store.dispatch('msgalert', {err: 'Неверный формат номера телефона'});
+		} else {
+			login['login'] = '';
+		}
+		if(formData.password.length <= 7 ){
+			valid = false;
+			$store.dispatch('msgalert', {err: 'Минимальная длина пароля 8 символов'});
+			login['password'] = 'Минимальная длина пароля 8 символов';
+		} else {
+			login['password'] = '';
+		}
+		if(valid == true){
+			let fixLogin = formData.login;
+			formData.login = fixLogin.replace(/\D/g,'');
+			$store.dispatch('pass', {pass: formData.password}).then(function(password) {
+				formData.password = password;
+				$f7.request.postJSON(apiServer+'user/login', formData).then(function (res) {
+					if(res.data){
+						if(res.data.err){
+							$f7.preloader.hide(); 
+							$store.dispatch('msgalert', {err: res.data.err});
+							login = res.data;
+							$update();
+						} else {
+							if(res.data.token){
+								$f7.form.storeFormData('token', res.data.token);
+								$f7.request.setup({
+									headers: {
+										'Authorization': res.data.token
+									}
+								});
+								window.location.href = baseUrl;
+							} else {
+								$f7.preloader.hide();
+								$store.dispatch('msgalert', {err: 'Try later'});
+							}										
+						}									
+					} else {
+						$f7.preloader.hide();
+						$store.dispatch('msgalert', {err: 'Try later'});
+					}							
+				});
+			});
+		} else {
+			$update();
+			$f7.preloader.hide();
+		}
+		
+	}
+
+	$on('pageInit', () => {
+		let loginmasklogin = new Freedom.PhoneFormatter( numberPatterns );
+		loginmasklogin.attachToInput(document.getElementById('login-mask-login'));
+	/*
+	var phoneMask = IMask(
+		document.getElementById('login-mask-login'), {
+			mask: '+{7} (000) 000-00-00'
+		}
+	);
+	*/
+	
+	});
+    return $render;
+}
+</script>

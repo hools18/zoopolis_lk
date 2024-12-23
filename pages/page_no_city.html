@@ -1,0 +1,98 @@
+<template>
+    <div class="page auth">
+        <div class="page-content">
+            <div class="container" style="max-width: 500px; margin: auto; height: auto">
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-100 small-100 medium-100 large-100 xlarge-100">
+                        <div style="width: 220px;
+                                    height: 195px;
+                                    background-color: #EB6130;
+                                    display: flex;
+                                    margin: 0 auto;
+                                    border-radius: 10px;">
+                            <img src="assets/sad_dog_new.png" style="margin: 0 auto; object-fit: contain"/>
+                        </div>
+                        <div style="margin: 0 auto; max-width: 550px">
+                            <h1 class="headForm" style="font-size: 30px; line-height: 30px;">Наш сервис еще не работает
+                                в вашем городе</h1>
+                            <div class="afterhead">
+                                Оставьте нам ваш город и тогда мы сообщим, когда расширим зону работы.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-100 small-100 medium-100 large-100 xlarge-100">
+                        <form id="cityData" name="cityData">
+                            <div class="item-input-wrap">
+                                <input type="text" name="city" placeholder="Город"
+                                       style="height: 55px; max-width: 420px; margin: 0px auto; margin-top: 20px;"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row"
+                     style="margin-top: 20px; display: flex;justify-content: space-between;align-items: center;flex-wrap: wrap;">
+                    <a @click=${closeToHome} class="button button-outline"
+                       style="width: 170px; margin: 0 auto; height: 55px; margin-bottom: 20px;">Уйти</a>
+                    <a @click=${sendEmail} class="button button-outline"
+                       style="width: 170px; margin: 0 auto; height: 55px; color: white; background-color:  #eb6130; margin-bottom: 20px;">Оставить заявку</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        function closeToHome() {
+            location.href = 'https://xn--g1acilaagt.xn--90ais/'
+        }
+
+        function sendEmail() {
+            let valid = true;
+            var formData = $f7.form.convertToData('#cityData');
+            if(formData.city.length <= 3 ){
+                valid = false;
+                $store.dispatch('msgalert', {err: 'Заполните поле Город'});
+            }
+
+            if(valid === true){
+
+                $f7.request.postJSON(apiServer + 'city/requestSave', formData).then(function (res) {
+                    if (res.data) {
+                        if (res.data.error) {
+                            $store.dispatch('msgalert', {
+                                err: res.data.error
+                            });
+                        } else {
+                            location.href = '/success-save-email'
+                        }
+
+                    } else {
+                        $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                    }
+
+                });
+            }
+        }
+
+        return $render;
+    }
+</script>
