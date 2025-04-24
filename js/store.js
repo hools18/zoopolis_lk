@@ -34,7 +34,6 @@ const store = createStore({
 		},
 		
 		pass({ state }, {pass}) {
-			pass = md5('7a76-db07'+md5(pass)+'8952-a5e8');
 			return pass;
 		},
 
@@ -107,9 +106,9 @@ const store = createStore({
 								} else {
 									app.store.state.pets = [];
 								};
-								app.store.dispatch('toast', {
-									text: 'Токен верный. Получаем пользовательские данные.'
-								});
+								// app.store.dispatch('toast', {
+								// 	// text: 'Токен верный. Получаем пользовательские данные.'
+								// });
 								resolve(true);
 							}
 						} else {

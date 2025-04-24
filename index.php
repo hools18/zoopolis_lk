@@ -45,12 +45,17 @@ $template = filemtime_r('pages');
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo 'https://'.$domain;?>/framework7/framework7-bundle.min.css?v=<?php echo filemtime('framework7/framework7-bundle.min.css');?>">
 	<link rel="stylesheet" href="<?php echo 'https://'.$domain;?>/css/zoopolis.css?v=<?php echo filemtime('css/zoopolis.css');?>">
+	<link rel="stylesheet" href="<?php echo 'https://'.$domain;?>/assets/fonts/StratosLCWeb/stylesheet.css?v=1">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=4fb02c15-f66c-4d81-8357-70d95ccff377" type="text/javascript"></script>
     <style>
         ul.subscribe-list-services li {
             list-style-image: url('assets/icon_list.svg');
         }
         ul.subscribe-list-services-select li {
             list-style-image: url('assets/icon_list_white.svg');
+        }
+        ul.subscribe-list-services-select-gray li {
+            list-style-image: url('assets/icon_list_gray.svg');
         }
     </style>
 
@@ -75,11 +80,10 @@ $template = filemtime_r('pages');
 	<script src="<?php echo 'https://'.$domain;?>/routes/?v=<?php echo $template;?>"></script>
 	<script src="<?php echo 'https://'.$domain;?>/js/imask.js?v=<?php echo filemtime('js/imask.js');?>"></script>
 	<script src="<?php echo 'https://'.$domain;?>/js/phone-formatter_master_lib.js?v=<?php echo filemtime('js/phone-formatter_master_lib.js');?>"></script>
-
 	<script src="<?php echo 'https://'.$domain;?>/js/md5.min.js?v=<?php echo filemtime('js/md5.min.js');?>"></script>
 	<script src="<?php echo 'https://'.$domain;?>/js/store.js?v=<?php echo filemtime('js/store.js');?>"></script>
 	<script src="<?php echo 'https://'.$domain;?>/js/app.js?v=<?php echo filemtime('js/app.js');?>"></script>
-	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=1af58e44-ecb0-4b9d-8605-2fc828bb06be" type="text/javascript"></script>
+
 	<script type="text/javascript" src="https://js.bepaid.by/widget/be_gateway.js"></script>
 <!--	<link rel="stylesheet" href="--><?php //echo 'https://'.$domain;?><!--/css/">-->
 </body>

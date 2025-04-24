@@ -9,7 +9,7 @@
 						<div class="afterhead">Введите номер телефона<br/>для восстановления пароля</div>
 					</div>
 					<div class="col-100 small-100 medium-100 large-100 xlarge-100">
-						<form class="dataForm" id="recovery" name="recovery">
+						<form class="dataForm dataForm-login" id="recovery" name="recovery">
 							<div>
 								<label data-err="${recovery.login}">
 									<input id="recovery-mask-login" class="input" name="login" type="text" placeholder="Номер телефона" required/>
@@ -41,7 +41,6 @@ export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onM
 		if(formData.login.length <= 10 ){
 			valid = false;
 			recovery['login'] = 'Неверный формат номера телефона';
-			$store.dispatch('msgalert', {err: 'Неверный формат номера телефона'});
 		} else {
 			recovery['login'] = '';
 		}

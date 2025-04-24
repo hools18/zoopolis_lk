@@ -1,0 +1,44 @@
+<template>
+    <div class="page auth">
+        <a @click=${closeToHome} class="closeToHome"><img src="assets/icon_close.svg"/></a>
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-100 small-100 medium-100 large-100 xlarge-100">
+                        <a>Авторизация QR-кода</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        $on('pageInit', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const myParam = urlParams.get('uid');
+            console.log(myParam)
+        });
+
+        function closeToHome() {
+            location.href = 'https://xn--g1acilaagt.xn--90ais/'
+        }
+
+        return $render;
+    }
+</script>

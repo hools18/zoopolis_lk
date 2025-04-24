@@ -1,0 +1,236 @@
+<template>
+    <div class="page auth">
+        <div class="nav" style="padding-left: 20px; padding-top: 100px;">
+            <div>
+                <a class="logo" @click=${closeToHome}><img src="/assets/logo_white.png" style="width: 50px"/></a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="container" style="margin-bottom:  50px; overflow-y: auto">
+                <form class="dataForm" id="missingReport" name="missingReport"
+                      style="padding-top: 0px; padding-bottom: 100px;">
+
+                    <div class="head" style="padding-top: 0px">
+                        <h1 class="headForm" style="padding-bottom: 20px;">Вы нашли питомца?</h1>
+                        <div class="container">
+                            <div class="row">
+                                <div class="card-container-with-title"
+                                     style="box-sizing: border-box;  width: 100%;display: flex;    flex: 0 0 auto;    flex-direction: column;align-items: stretch;    align-self: stretch;    justify-content: center;    height: 95px;    padding-right: 25px;    padding-left: 25px;overflow: hidden;    background: #f4f4f9;    border-radius: 15px;">
+                                    <div style="box-sizing: border-box;display:flex;flex: 0 0 auto;flex-direction: row;gap: 15px;align-items: center;justify-content: flex-start;">
+                                        <img src="/assets/logo_white.png"
+                                             style="box-sizing: border-box;    display: block;    flex: 0 0 auto;    width: 55px;    max-width: initial;    height: 55px;"/>
+                                        <p style="box-sizing: border-box;    flex: 0 0 auto;    width: 235px;    padding: 0;margin: 0;       color: #161616;    text-align: left;    letter-spacing: -0.38px;">
+                                            ${petname}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="    flex: 0 0 auto;
+    align-self: stretch;
+    padding: 0;
+    margin: 0;
+    font: 400 25px / 30px Stratos LC Web;
+    color: #161616;
+    text-align: left;
+    letter-spacing: -0.38px;">Оставить сообщение</p>
+                    <div>
+                        <label>
+                            <input class="input" name="name" placeholder="Имя" required type="text"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input class="input" name="phone" id="phone-mask" placeholder="Номер телефона" required
+                                   type="text"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input class="input" name="text" placeholder="Комментарий" required type="text"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <textarea style="height: auto;padding: 15px 25px;width: 100%;">${address}</textarea>
+                        </label>
+                    </div>
+                    <div id="veterinaryclinicsmap"></div>
+                    <div>
+                        <a href="#" class="col button button-fill" @click=${sendForm}>Отправить заявку</a>
+                    </div>
+                    <div>
+                        <p style="    flex: 0 0 auto;
+    align-self: stretch;
+    padding: 0;
+    font: 400 25px / 30px Stratos LC Web;
+    margin: 0;
+    color: #161616;
+    text-align: left;
+    letter-spacing: -0.38px;">Связаться с менеджером</p>
+                        <p style="flex: 0 0 auto;     font: 400 18px Stratos LC Web;   align-self: stretch;    padding: 0;    margin: 0;       color: #eb6130;    text-align: left;    letter-spacing: -0.27px;">
+                            ${managerphone}</p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        let coordOrder = 'latlong';
+        let managerphone = '';
+        let petname = '';
+        let latitude = '';
+        let longitude = '';
+        let address = '';
+        let numberPatterns = [
+            '+375 NN NNN NN NN',
+            '+7 NNN NNN NN NN',
+
+        ];
+
+        $on('pageAfterIn', () => {
+            app.preloader.show();
+            app.request.postJSON(apiServer + 'api/qrcode/check', {uid: localStorage.getItem('uid')}).then(function (res) {
+                if (res.data.message !== 'error') {
+                    petname = res.data.pet_name;
+                    managerphone = res.data.manager_number;
+                    $update();
+                    setTimeout(function () {
+                        loadmap();
+                    }, 300)
+                } else {
+                    location.href = '/qrcode-pet-no-missing'
+                }
+            });
+            app.preloader.hide();
+        });
+
+        function closeToHome() {
+            location.href = '/'
+        }
+
+        function sendForm() {
+            if($('[name="name"]').val() === ''){
+                $f7.store.dispatch('msgalert', {
+                    err: 'Заполните поле имя.'
+                });
+                return false;
+            }
+            if($('[name="phone"]').val() === ''){
+                $f7.store.dispatch('msgalert', {
+                    err: 'Заполните поле номер телефона.'
+                });
+                return false;
+            }
+
+            if($('[name="address"]').val() === ''){
+                $f7.store.dispatch('msgalert', {
+                    err: 'Заполните поле адрес.'
+                });
+                return false;
+            }
+
+            let formData = $f7.form.convertToData('#missingReport');
+            formData['longitude'] = longitude;
+            formData['latitude'] = latitude;
+            formData['address'] = address;
+            formData['uid'] = localStorage.getItem('uid');
+            app.request.postJSON(apiServer + 'api/qrcode/found-pet', formData).then(function (res) {
+                location.href = '/qrcode-success'
+            });
+        }
+
+        function loadmap() {
+            let mapCenter = [53.905971, 27.556458];
+
+            let zoom = 12;
+
+            var map = new ymaps.Map('veterinaryclinicsmap', {
+                center: mapCenter,
+                zoom: zoom
+            }, {
+                searchControlNoPlacemark: true
+            });
+
+            ymaps.modules.require([
+                'GeoObjectEditor',
+                'MapStateInfo',
+                'DemoControl'
+            ]).spread(function (GeoObjectEditor, MapStateInfo, DemoControl) {
+                map.controls.add(new DemoControl({coordOrder: coordOrder}));
+            });
+
+            map.events.add('click', function (e) {
+                if (!map.balloon.isOpen()) {
+                    var coords = e.get('coords');
+                    latitude = coords[0].toPrecision(8);
+                    longitude = coords[1].toPrecision(8);
+
+
+                    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords[0].toPrecision(8)}&lon=${coords[1].toPrecision(8)}`;
+
+                    try {
+                        getAddressFromCoords(coords[0].toPrecision(8), coords[1].toPrecision(8)).then(function (str){
+                            address = str;
+                                map.balloon.open(coords, {
+                                contentHeader: 'Адрес где найден питомец',
+                                contentBody: '' +
+                                    '<p>Данные точки: ' + str + '</p>',
+                            });
+                            $update();
+                        });
+                    } catch (error) {
+                        console.error('Ошибка:', error);
+                        return null;
+                    }
+                    $update();
+
+                } else {
+                    map.balloon.close();
+                }
+            });
+
+            map.events.add('balloonopen', function (e) {
+                map.hint.close();
+            });
+        }
+
+        $on('pageInit', () => {
+            let loginmasklogin = new Freedom.PhoneFormatter(numberPatterns);
+            loginmasklogin.attachToInput(document.getElementById('phone-mask'));
+        });
+
+        async function getAddressFromCoords(lat, lng) {
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+            try {
+                const response = await fetch(url, {headers: {'User-Agent': 'MyApp'}});
+                const data = await response.json();
+                return data.display_name || 'Адрес не найден';
+            } catch (error) {
+                console.error('Ошибка:', error);
+                return null;
+            }
+        }
+
+        return $render;
+    }
+</script>

@@ -42,7 +42,7 @@
 									<a href="#" class="item huge link" data-id="${data.id}" @click=${showPromo}>
 										<div class="row">
 											<div class="col-50 whitebg">
-												<div class="media" style="background-image: url(/media/600/${data.media}.webp);"></div>
+												<div class="media" style="background-image: url(https://api.sergivanov.ru/media/orig/${data.media});"></div>
 											</div>
 											<div class="col-50 data">
 												<div>
@@ -130,9 +130,9 @@
 					<div class="time">До ${promo.stoptextdata} (${promo.stoptext})</div>
 				</div>
 				<div class="gotocode">
-					<div class="promocode link" code="${promo.promocode}"  @click=${promocode}>
+					<div class="promocode link" @click=${()=> promocode(promo.promocode)}>
 						<div class="label">Промокод</div>
-						<div class="pers">${promo.percent}%</div>
+						<div class="pers" style="margin: 0 5px;">${promo.percent}%</div>
 						<img class="copy" src="assets/icon_copy.svg"/>
 					</div>
 					<div class="promolink"><a href="${promo.promolink}" target="_blank" class="col button button-fill external link">К покупкам</a></div>
@@ -210,14 +210,13 @@ export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onM
 			}
 		});
 	}
-	function promocode(e){
-		getcode = e.target.getAttribute('code');
-		navigator.clipboard.writeText(getcode)
-		.then(
-			() => $store.dispatch('msgalert', {err: 'Промокод успешно скопирован.'})
-		).catch(
-			err => $store.dispatch('msgalert', {err: 'Функция копирования недоступна в вашем браузере.'})
-		);
+	function promocode(code){
+		navigator.clipboard.writeText(code)
+				.then(
+						() => $store.dispatch('msgalert', {err: 'Промокод успешно скопирован.'})
+				).catch(
+						err => $store.dispatch('msgalert', {err: 'Функция копирования недоступна в вашем браузере.'})
+				);
 	}
 	$on("pageInit", function (e, page) {
 		startLoadPromo();

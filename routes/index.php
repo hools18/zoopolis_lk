@@ -50,6 +50,14 @@ var routes = [
 			animate: false,
 		}
     },
+    {
+        path: "/code",
+        componentUrl: "./pages/user/code.html?v=<?php echo $template;?>",
+        name: "code",
+        options: {
+            animate: false,
+        }
+    },
 	{
         path: "/signup",
         componentUrl: "./pages/user/signup.html?v=<?php echo $template;?>",
@@ -105,46 +113,71 @@ var routes = [
 		name: "subscription"
     },
 	{
-        path: "/subscribing/:id",
+        path: "/subscribing",
         componentUrl: "./pages/subscription/subscribing.html?v=<?php echo $template;?>",
 		name: "subscribing"
     },
-	{
-        path: "/nosub",
-        componentUrl: "./pages/subscription/nosub.html?v=<?php echo $template;?>",
-		name: "nosub"
+<!--	{-->
+<!--        path: "/nosub",-->
+<!--        componentUrl: "./pages/subscription/nosub.html?v=--><?php //echo $template;?><!--",-->
+<!--		name: "nosub"-->
+<!--    },-->
+<!--	{-->
+<!--        path: "/promo",-->
+<!--        componentUrl: "./pages/promo/promo.html?v=--><?php //echo $template;?><!--",-->
+<!--		name: "promo"-->
+<!--    },-->
+<!---->
+<!--	{-->
+<!--        path: "/services",-->
+<!--        componentUrl: "./pages/services/services.html?v=--><?php //echo $template;?><!--",-->
+<!--		name: "services"-->
+<!--    },-->
+    {
+        path: "/qrcode",
+        componentUrl: "./pages/qr_code/qrcode.html?v=<?php echo $template;?>",
+        name: "qrcode"
     },
-	{
-        path: "/promo",
-        componentUrl: "./pages/promo/promo.html?v=<?php echo $template;?>",
-		name: "promo"
+    {
+        path: "/qrcode-auth",
+        componentUrl: "./pages/qr_code/auth.html?v=<?php echo $template;?>",
+        name: "qrcode_auth"
+    },
+    {
+        path: "/qrcode-found",
+        componentUrl: "./pages/qr_code/found.html?v=<?php echo $template;?>",
+        name: "qrcode_found"
+    },
+    {
+        path: "/qrcode-success",
+        componentUrl: "./pages/qr_code/success.html?v=<?php echo time();?>",
+        name: "qrcode_success"
+    },
+    {
+        path: "/qrcode-pet-no-missing",
+        componentUrl: "./pages/qr_code/pet_not_missing.html?v=<?php echo time();?>",
+        name: "qrcode_pet_not_missing"
     },
 
-	{
-        path: "/services",
-        componentUrl: "./pages/services/services.html?v=<?php echo $template;?>",
-		name: "services"
-    },
 
 
 
-
-	{
-        path: "/uikit",
-        componentUrl: "./pages/uikit.html?v=<?php echo $template;?>",
-		options: {
-			animate: false,
-		},
-		on: {
-			pageInit: function (e, page) {
-				app.store.state.menu = 'uikit';
-				app.views[0].router.refreshPage();
-			},
-		}
-    },
+<!--	{-->
+<!--        path: "/uikit",-->
+<!--        componentUrl: "./pages/uikit.html?v=--><?php //echo $template;?><!--",-->
+<!--		options: {-->
+<!--			animate: false,-->
+<!--		},-->
+<!--		on: {-->
+<!--			pageInit: function (e, page) {-->
+<!--				app.store.state.menu = 'uikit';-->
+<!--				app.views[0].router.refreshPage();-->
+<!--			},-->
+<!--		}-->
+<!--    },-->
     // Default route (404 page). MUST BE THE LAST
     {
-        path: "(.*)",
-        componentUrl: "./pages/404.html?v=<?php echo $template;?>",
+        path: '(.*)',
+        url: './pages/404.html',
     },
 ];

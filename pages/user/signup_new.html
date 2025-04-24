@@ -1,0 +1,461 @@
+<template>
+    <div class="page subscription">
+        <div class="page-content">
+            <div class="fixpad" style="padding-top: 80px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-100 small-100 medium-100 large-100 xlarge-100">
+                            <form style="max-width: 600px">
+                                <div class="listCard" style="gap: 30px">
+                                    <div class="box">
+                                        <h1 class="headTitleSub" style="font-size: 50px;line-height: 90px;margin-top: 20px;">
+                                            Регистрация</h1>
+                                    </div>
+                                    <div class="box">
+                                        <div class="col-100 small-100 medium-100 large-100 xlarge-100">
+                                            <form class="dataForm"  id="signup" name="signup" style="gap: 25px">
+                                                <div>
+                                                    <label data-err="${signup.login}">
+                                                        <input id="signup-mask-login" class="input login" name="login"
+                                                               placeholder="Номер телефона" type="tel" required/>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <label data-err="${signup.email}">
+                                                        <input class="input" name="email" type="text"
+                                                               placeholder="Email" required/>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" id="show-passwords" class="show-password"
+                                                           checked/>
+                                                    <label for="show-passwords" class="show_eye">
+                                                        <img src="assets/icon_eye.svg"/>
+                                                    </label>
+                                                    <label data-err="${signup.password}">
+                                                        <input id="password" class="input" name="password" type="text"
+                                                               placeholder="Пароль" required/>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <input type="checkbox" id="show-passwordcheck" class="show-password"
+                                                           checked/>
+                                                    <label for="show-passwordcheck" class="show_eye">
+                                                        <img src="assets/icon_eye.svg"/>
+                                                    </label>
+                                                    <label data-err="${signup.passwordcheck}">
+                                                        <input id="passwordcheck" class="input" name="passwordcheck"
+                                                               type="text" placeholder="Повторите пароль" required/>
+                                                    </label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="name" style="font-size: 30px; line-height: 30px">Контактные данные
+                                        </div>
+                                        <form class="dataForm row" id="userData" name="userData">
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Имя*</div>
+                                                <label data-err="${userDataError.first}">
+                                                    <input class="input" name="first" type="text" placeholder="Имя" maxlength="20"
+                                                           value="${profile.first}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Фамилия*</div>
+                                                <label data-err="${userDataError.last}">
+                                                    <input class="input" name="last" type="text" placeholder="Фамилия" maxlength="20"
+                                                           value="${profile.last}"/>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="box">
+                                        <div class="name" style="font-size: 30px; line-height: 30px">Адрес</div>
+                                        <form class="dataForm row" id="userAddress" name="userAddress">
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Город*</div>
+                                                <label data-err="${userAddressError.city}">
+                                                    <input class="input" name="city" type="text" placeholder="Город" maxlength="20"
+                                                           value="${address.city}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Улица и дом*</div>
+                                                <label data-err="${userAddressError.street}">
+                                                    <input class="input" name="street" type="text" maxlength="40"
+                                                           placeholder="Улица и номер дома" value="${address.street}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Подъезд*</div>
+                                                <label data-err="${userAddressError.entrance}">
+                                                    <input class="input js-input-absint" name="entrance" type="number"  min="1"
+                                                           placeholder="Номер подъезда" value="${address.entrance}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Квартира*</div>
+                                                <label data-err="${userAddressError.apartment}">
+                                                    <input class="input js-input-absint" name="apartment" type="number"  min="1"
+                                                           placeholder="Номер квартиры" value="${address.apartment}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Этаж*</div>
+                                                <label data-err="${userAddressError.floor}">
+                                                    <input class="input js-input-absint" name="floor"
+                                                           type="number"
+                                                           min="1"
+                                                           placeholder="Этаж" value="${address.floor}"/>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="box">
+                                        <div class="name" style="font-size: 30px; line-height: 30px">Информация о
+                                            питомце
+                                        </div>
+                                        <form class="dataForm row" id="userPets" name="userPets">
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Кличка питомца</div>
+                                                <label data-err="${userPetsError.name}">
+                                                    <input class="input" name="name" type="text"
+                                                           maxlength="20"
+                                                           placeholder="Кличка питомца" value="${pets.name}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50 zoneEntrance">
+                                                <div class="name">Возраст</div>
+                                                <label data-err="${userPetsError.age}">
+                                                    <input class="input" name="ageText" type="text"
+                                                           placeholder="Возраст питомца" value="${pets.ageText}"
+                                                           disabled/>
+                                                    <div class="range-slider range-slider-init color-black petsAge"
+                                                         data-label="true">
+                                                        <input class="" type="range" name="age" min="0" max="20"
+                                                               step="1" value="${pets.age}" @input=${onAge}/>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="row obj" style="    display: contents;">
+                                                <div class="col-100 medium-50 large-50 xlarge-50">
+                                                    <div class="name">Пол</div>
+
+                                                    <label class="item-checkbox item-content" @click=${selectMale}>
+                                                        <input type="checkbox" name="male" value="1" checked/>
+                                                        <i class="icon icon-checkbox"></i>
+                                                        <div class="item-inner">
+                                                            <div class="item-title">Мужской</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-100 medium-50 large-50 xlarge-50 minmtop">
+                                                    <div class="name" style="opacity: 0;">*</div>
+                                                    <label class="item-checkbox item-content" @click=${selectFemale}>
+                                                        <input type="checkbox" name="female" value="1"/>
+                                                        <i class="icon icon-checkbox"></i>
+                                                        <div class="item-inner">
+                                                            <div class="item-title">Женский</div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-100 fullw">
+                                                <div class="name">Порода</div>
+                                                <label data-err="${userPetsError.breed}">
+                                                    <input class="input" name="breed"
+                                                           maxlength="20" type="text" placeholder="Порода"
+                                                           value="${pets.breed}"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 fullw">
+                                                <div class="name">Комментарий</div>
+                                                <label data-err="${userPetsError.comm}">
+                                                    <textarea name="comm" maxlength="500">${pets.comm}</textarea>
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div><a href="#" class="col button button-fill" @click=${register}><span style="padding-right: 10px;">Зарегистрироваться</span> <img src="assets/icon_more.svg"/></a></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+
+        let signup = {};
+        let profile = [];
+        let address = [];
+        let pets = [];
+
+        let userDataError = [];
+        let userAddressError = [];
+        let userPetsError = [];
+
+        let numberPatterns = [
+            '+375 NN NNN-NN-NN',
+            '+7 (NNN) NNN-NN-NN',  // Россия и Казахстан
+        ];
+
+
+
+        const onAge = (e) => {
+            $store.dispatch('getNoun', {
+                number: e.target.value,
+                one: 'год',
+                two: 'года',
+                five: 'лет'
+            }).then(function (text) {
+                if (text) {
+                    pets.ageText = e.target.value + ' ' + text;
+                    $update();
+                }
+            });
+
+        };
+
+        function selectMale() {
+            document.querySelectorAll('#userPets input[name="female"]')[0].checked = false;
+            document.querySelectorAll('#userPets input[name="male"]')[0].checked = true;
+
+        };
+
+        function selectFemale() {
+            document.querySelectorAll('#userPets input[name="male"]')[0].checked = false;
+            document.querySelectorAll('#userPets input[name="female"]')[0].checked = true;
+
+        };
+
+        function register() {
+            $f7.preloader.show();
+            $f7.store.dispatch('toast', {
+                text: 'Сохраняем пользовательские формы.'
+            });
+
+            let valid = true;
+            let formData = $f7.form.convertToData('#signup');
+            let formDataUser = $f7.form.convertToData('.page-current #userData');
+            let formAddressUser = $f7.form.convertToData('.page-current #userAddress');
+            let fixLogin = formData.login;
+            formData.login = fixLogin.replace(/\D/g, '');
+
+
+            if (formData.login.length <= 10 || formData.login.length > 12) {
+                valid = false;
+                signup['login'] = 'Неверный формат номера телефона';
+                $store.dispatch('msgalert', {err: 'Неверный формат номера телефона'});
+            } else {
+                signup['login'] = '';
+            }
+            formData.uid = localStorage.getItem('uid');
+
+            if (formData.password.length <= 7) {
+                valid = false;
+                $store.dispatch('msgalert', {err: 'Минимальная длина пароля 8 символов'});
+                signup['password'] = 'Минимальная длина пароля 8 символов';
+            } else {
+                signup['password'] = '';
+            }
+            if (formData.passwordcheck != formData.password) {
+                valid = false;
+                $store.dispatch('msgalert', {err: 'Контрольный пароль на совпадает'});
+                signup['passwordcheck'] = 'Контрольный пароль на совпадает';
+            } else {
+                signup['passwordcheck'] = '';
+            }
+
+            if (formDataUser.first.length <= 3) {
+                valid = false;
+                userDataError['first'] = 'Имя обязательно для заполнения';
+                $store.dispatch('msgalert', {err: 'Имя обязательно для заполнения'});
+            } else {
+                userDataError['first'] = '';
+            }
+
+            if (formDataUser.last.length <= 3) {
+                valid = false;
+                userDataError['last'] = 'Фамилия обязательна для заполнения';
+                $store.dispatch('msgalert', {err: 'Фамилия обязательна для заполнения'});
+            } else {
+                userDataError['last'] = '';
+            }
+
+            if (formAddressUser.city.length <= 3) {
+                valid = false;
+                userAddressError['city'] = 'Город обязателен для заполнения';
+                $store.dispatch('msgalert', {err: 'Город обязателен для заполнения'});
+            } else {
+                userAddressError['city'] = '';
+            }
+
+            if (formAddressUser.street.length <= 3) {
+                valid = false;
+                userAddressError['street'] = 'Улица и номер дома обязательны для заполнения';
+                $store.dispatch('msgalert', {err: 'Улица и номер дома обязательны для заполнения'});
+            } else {
+                userAddressError['street'] = '';
+            }
+
+            if (formAddressUser.entrance.length == 0) {
+                valid = false;
+                userAddressError['entrance'] = 'Подъезд обязателен для заполнения';
+                $store.dispatch('msgalert', {err: 'Подъезд обязателен для заполнения'});
+            } else {
+                userAddressError['entrance'] = '';
+            }
+            if (formAddressUser.apartment.length == 0) {
+                valid = false;
+                userAddressError['apartment'] = 'Квартира обязательна для заполнения';
+                $store.dispatch('msgalert', {err: 'Квартира обязательна для заполнения'});
+            } else {
+                userAddressError['apartment'] = '';
+            }
+            if (formAddressUser.floor.length == 0) {
+                valid = false;
+                userAddressError['floor'] = 'Этаж обязателен для заполнения';
+                $store.dispatch('msgalert', {err: 'Этаж обязателен для заполнения'});
+            } else {
+                userAddressError['floor'] = '';
+            }
+
+
+            if (valid == true) {
+                delete formData['passwordcheck'];
+                let fixLogin = formData.login;
+                formData.login = fixLogin.replace(/\D/g, '');
+                $store.dispatch('pass', {pass: formData.password}).then(function (password) {
+                    formData.password = password;
+                    $f7.request.postJSON(apiServer + 'user/create', formData).then(function (res) {
+                        if (res.data) {
+                            if (res.data.err) {
+                                $f7.preloader.hide();
+                                $store.dispatch('msgalert', {err: res.data.err});
+                                signup = res.data;
+                                $update();
+                            } else {
+                                if (res.data.token) {
+                                    $f7.form.storeFormData('token', res.data.token);
+                                    $f7.request.setup({
+                                        headers: {
+                                            'Authorization': res.data.token
+                                        }
+                                    });
+                                    saveUserData()
+                                } else {
+                                    $f7.preloader.hide();
+                                    $store.dispatch('msgalert', {err: 'Try later'});
+                                }
+                            }
+
+                        } else {
+                            $f7.preloader.hide();
+                            $store.dispatch('msgalert', {err: 'Try later'});
+                        }
+                    });
+                });
+            } else {
+                $update();
+                $f7.preloader.hide();
+            }
+        }
+
+        function saveUserData() {
+            let formDataUser = $f7.form.convertToData('.page-current #userData');
+            $f7.request.postJSON(apiServer + 'user/savedata', formDataUser).then(function (res) {
+                if (res.data) {
+                    if (res.data.error) {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {
+                            err: res.data.error
+                        });
+                    } else {
+                        $f7.preloader.hide();
+                        $f7.store.dispatch('toast', {
+                            text: 'Контактные данные - Сохранено.'
+                        });
+
+                    }
+
+                } else {
+                    $f7.preloader.hide();
+                    $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                }
+
+            });
+            //
+            var formData = $f7.form.convertToData('.page-current #userAddress');
+            $f7.request.postJSON(apiServer + 'user/savedataaddress', formData).then(function (res) {
+                if (res.data) {
+                    if (res.data.error) {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {
+                            err: res.data.error
+                        });
+                    } else {
+                        $f7.preloader.hide();
+                        $f7.store.dispatch('toast', {
+                            text: 'Адрес - Сохранено.'
+                        });
+                    }
+
+                } else {
+                    $f7.preloader.hide();
+                    $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                }
+
+            });
+            let formDataPets = $f7.form.convertToData('.page-current #userPets');
+            $f7.request.postJSON(apiServer + 'user/savedatapets', formDataPets).then(function (res) {
+                if (res.data) {
+                    if (res.data.error) {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {
+                            err: res.data.error
+                        });
+                    } else {
+                        $f7.preloader.hide();
+                        $f7.store.dispatch('toast', {
+                            text: 'Информация о питомце - Сохранено'
+                        });
+                        window.location.href = baseUrl;
+                    }
+
+                } else {
+                    $f7.preloader.hide();
+                    $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                }
+
+            });
+        }
+
+        $on("pageInit", function (e, page) {
+            let loginmasklogin = new Freedom.PhoneFormatter(numberPatterns);
+            loginmasklogin.attachToInput(document.getElementById('signup-mask-login'));
+            if ($f7.form.getFormData('token')) {
+                location.href = '/'
+            }
+        });
+
+        return $render;
+    }
+</script>

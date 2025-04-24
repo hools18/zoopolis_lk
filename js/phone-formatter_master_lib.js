@@ -88,12 +88,14 @@ Freedom.PhoneFormatter.prototype.pickEmptyFieldStart = function() {
 Freedom.PhoneFormatter.prototype.refreshInputValue = function( input ) {
     var currentValue = input.value;
     var newValue;
+
     try {
         newValue = this.format( currentValue, true );
     } catch ( e ) {
-        // If no pattern matched, removing invalid characters anyway.
-        newValue = this.removeInvalidCharacters( currentValue );
+        newValue = '';
     }
+
+
     this.setValueAndHandleCursor( input, newValue );
 }
 

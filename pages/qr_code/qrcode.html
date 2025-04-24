@@ -1,0 +1,144 @@
+<template>
+    <div class="page auth">
+        <div class="nav" style="margin: 0 auto; margin-top: 2vh">
+            <div>
+                <a class="logo" @click=${closeToHome}><img src="/assets/image_7eb8040.png" style="width: 50px"/></a>
+            </div>
+        </div>
+        <div class="page-content" style="justify-content: center;">
+            <div class="container">
+
+                <div class="row" style="padding-top: 10px;">
+                    <div class="col-100 small-50 medium-50" style="display: flex
+;
+    padding-top: 20px;
+    justify-content: center;">
+                        <div style="box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 200px;
+    width: 320px;
+    padding-right: 24px;
+    padding-left: 24px;
+    overflow: hidden;
+    background: #eb6130;
+    border-radius: 15px;">
+                            <div style="flex: 0 0 auto;    padding-top: 25px;">
+                                <p style="padding: 0;    margin: 0;    font: 400 25px / 30px Stratos LC Web;color: white;    letter-spacing: -0.38px;">
+                                    Авторизация в Zoopolis</p>
+                                <div style="box-sizing: border-box;display: flex;    flex-direction: row;    gap: 5px;    align-items: center;    justify-content: flex-start;    margin-top: 90px;">
+                                    <p style="box-sizing: border-box;    flex: 0 0 auto;    width: 135px;    padding: 0;    margin: 0;    font: 400 18px Stratos LC Web;    color: #f9f9fa;    letter-spacing: -0.27px;"
+                                       @click=${auth}>Авторизоваться</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-100 small-50 medium-50" style="    display: flex
+;
+    padding-top: 20px;
+    justify-content: center;">
+                        <div style="box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 320px;
+    height: 200px;
+    padding-right: 24px;
+    padding-left: 24px;
+    overflow: hidden;
+    background: #eb6130;
+    border-radius: 15px;">
+                            <div style="flex: 0 0 auto;
+    padding-top: 25px;">
+                                <p style="padding: 0;    margin: 0;    font: 400 25px / 30px Stratos LC Web;
+    color: white;    letter-spacing: -0.38px;">Я нашел питомца</p>
+                                <div style="box-sizing: border-box;display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 90px;">
+                                    <p style="box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 135px;
+    padding: 0;
+    margin: 0;
+    font: 400 18px Stratos LC Web;
+    color: #f9f9fa;
+    letter-spacing: -0.27px;" @click=${found}>Оставить заявку</p>
+                                    <div class="svg-container">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        let qrcode = null;
+        $on('pageInit', () => {
+            let urlParams = new URLSearchParams(window.location.search);
+            qrcode = urlParams.get('uid');
+            if (qrcode !== null) {
+                localStorage.setItem('uid', qrcode)
+                $store.dispatch('checkToken').then(function (checkToken) {
+                    if (checkToken == true) {
+                        if ($store.state.profile.pet_uid === qrcode) {
+                            location.href = '/account'
+                        }
+                    }
+                });
+            } else {
+                localStorage.setItem('uid', '')
+                location.href = '/'
+            }
+        });
+
+        function closeToHome() {
+            location.href = '/'
+        }
+
+        function auth() {
+            location.href = '/login'
+        }
+
+        function found() {
+            app.request.postJSON(apiServer + 'api/qrcode/check', {uid: localStorage.getItem('uid')}).then(function (res) {
+                if (res.data.message !== 'error') {
+                    location.href = 'https://lk.sergivanov.ru/qrcode-found'
+                } else {
+                    location.href = 'https://lk.sergivanov.ru/qrcode-pet-no-missing'
+                }
+            });
+
+        }
+
+        return $render;
+    }
+</script>

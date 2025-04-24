@@ -16,9 +16,9 @@
                                 </select>
                             </div>
                             <a class="button button-outline icon" @click=${showSubscription}
-                               style="margin: 0 auto; margin-top: 30px;">Продолжить</a>
+                               style="margin: 0 auto; margin-top: 30px; width: 100%; max-width: 420px;">Продолжить</a>
                             <a href="/page-no-city" class="button button-outline icon"
-                               style="margin: 0 auto; margin-top: 10px;">Города нет в списке</a>
+                               style="margin: 0 auto; margin-top: 10px;width: 100%; max-width: 420px;">Города нет в списке</a>
                         </div>
                     </div>
                 </div>
@@ -60,6 +60,7 @@
         }
 
         function showSubscription() {
+
             if (document.querySelector('select[name="city"]').value == 0) {
                 $store.dispatch('msgalert', {err: 'Выберите город из списка.'});
             } else {

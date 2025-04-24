@@ -1,0 +1,44 @@
+<template>
+    <div class="page auth" style="background-color:#eb6130">
+        <div class="nav" style="margin: 0 auto; margin-top: 4vh">
+            <div>
+                <a class="logo" @click=${closeToHome}><img src="/assets/logo_white.png" style="width: 50px"/></a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-100">
+                        <h1 class="headForm" style="color: white">Спасибо!</h1>
+                        <h1 class="headForm" style="color: white">Со мной все в порядке</h1>
+                        <div class="afterhead">
+                            <a @click=${()=> showUrl('/signup')} style="text-decoration: underline;color: white;">Зарегистрироваться в сервисе</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        function closeToHome() {
+            location.href = '/'
+        }
+        return $render;
+    }
+</script>

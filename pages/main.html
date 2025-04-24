@@ -37,78 +37,41 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="item">
-                                                    <div class="row">
-                                                        <div class="col-100 data" @click=${showVeterinaryClinics}>
-                                                            <div>
-                                                                <div class="name">Информация о вет. клиниках</div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="action">
-                                                                    <div class="">Выбрать <img
-                                                                        src="assets/icon_more.svg"/></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="item" data-id="1" @click=${showPromo}>
-                                                    <div class="row">
-                                                        <div class="col-100 data">
-                                                            <div>
-                                                                <div class="name">Подбор вет. врача</div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="action">
-                                                                    <div class="">Выбрать <img
-                                                                        src="assets/icon_more.svg"/></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+<!--                                                <div class="item">-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col-100 data" @click=${showVeterinaryClinics}>-->
+<!--                                                            <div>-->
+<!--                                                                <div class="name">Информация о вет. клиниках</div>-->
+<!--                                                            </div>-->
+<!--                                                            <div>-->
+<!--                                                                <div class="action">-->
+<!--                                                                    <div class="">Выбрать <img-->
+<!--                                                                            src="assets/icon_more.svg"/></div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="item" data-id="1" @click=${showVeterinaryShops}>-->
+<!--                                                    <div class="row">-->
+<!--                                                        <div class="col-100 data">-->
+<!--                                                            <div>-->
+<!--                                                                <div class="name">Информация о Зоомагазинах</div>-->
+<!--                                                            </div>-->
+<!--                                                            <div>-->
+<!--                                                                <div class="action">-->
+<!--                                                                    <div class="">Выбрать <img-->
+<!--                                                                            src="assets/icon_more.svg"/></div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sheet-modal modal-promoinfo">
-                <div class="hat"><a class="link sheet-close" href="#"></a></div>
-                <div class="sheet-modal-inner">
-
-                    <div class="info">
-                        <div class="title">${promo.title}</div>
-                        <div class="shortdesc">
-                            <div class="sale">${promo.percent}%</div>
-                            ${promo.shortdesc}
-                        </div>
-                        <div class="time">До ${promo.stoptextdata} (${promo.stoptext})</div>
-                    </div>
-                    <div class="gotocode">
-                        <div class="promocode link" code="${promo.promocode}" @click=${promocode}>
-                            <div class="label">Промокод</div>
-                            <div class="pers">${promo.percent}%</div>
-                            <img class="copy" src="assets/icon_copy.svg"/>
-                        </div>
-                        <div class="promolink"><a href="${promo.promolink}" target="_blank"
-                                                  class="col button button-fill external link">К покупкам</a></div>
-                    </div>
-                    <div class="сonditions">
-                        <div>
-                            <div class="title">Условия</div>
-                            <div class="desc" innerHTML=${promo.сonditions}></div>
-                        </div>
-                        <div>
-                            <div class="other">Срок действия</div>
-                            <div class="desc">${promo.starttextdata} - ${promo.stoptextdata} (${promo.stoptext})</div>
-                        </div>
-                        <div>
-                            <div class="other">Минимальная сумма покупки</div>
-                            <div class="desc upp">${promo.minprice} ${promo.currency}</div>
                         </div>
                     </div>
                 </div>
@@ -121,67 +84,113 @@
                         <div class="title">Сообщить о пропаже</div>
                     </div>
                     <form class="userforms" id="missinganimal" name="missinganimal">
-                        <div class="сonditions">
-                            <div class="name">Расскажите что произошло</div>
-                            <div class="flexzone">
-                                <div class="text-editor text-editor-init missinganimaltext"
-                                     data-placeholder="Расскажите что произошло"
-                                     data-buttons='["bold", "italic", "underline", "strikeThrough"]' data-mode="popover"
-                                     style="--f7-text-editor-height: 150px">
-                                    <div class="text-editor-content" contenteditable></div>
-                                </div>
+                        <div class="сonditions" style="gap: 0px;">
+                            <div class="name" style="margin-bottom: 0px;">Расскажите что произошло</div>
+                            <div class="flexzone" style="max-width: 450px; padding-bottom: 20px;">
+                                <textarea name="text" style="height: auto;padding: 15px 25px;width: 100%;"></textarea>
                             </div>
+                            <div class="name" style="margin-bottom: 0px;">Адрес где пропал питомец</div>
+                            <div class="flexzone" style="max-width: 450px; padding-bottom: 20px;">
+                                <textarea name="address"
+                                          style="height: auto;padding: 15px 25px;width: 100%;">${address}</textarea>
+                            </div>
+                            <div id="missingpetmap"></div>
                         </div>
                     </form>
-                    <div class="sendform">
+                    <div class="sendform sendform-missing-pet">
                         <div class="promolink"><a href="#" class="col button button-fill link"
                                                   @click=${sendMissinganimal}>Отправить заявку</a></div>
                     </div>
                 </div>
             </div>
-            <div class="sheet-modal modal-veterinary-clinics">
-                <div class="hat"><a class="link sheet-close" href="#"></a></div>
-                <div class="sheet-modal-inner">
-                    <div class="info">
-                        <div class="title">Информация о вет. клиниках</div>
-                        <div class="desc">Мы выступаем посредником между клиниками и вами. Предоставляем сервис, где вы
-                            в одном месте можете получить всю нужную для себя информацию
-                        </div>
-                    </div>
-                    <div class="headmap row">
-                        <div class="col-50">
-                            <div class="title">Адреса</div>
-                        </div>
-                        <div class="col-50">
-                            <div class="desc count">${maplist.count}</div>
-                        </div>
-                    </div>
-                    <div class="segmented">
-                        <a href="#clinicsyandex" class="tab-link button tab-link-active">Карта</a>
-                        <a href="#clinicslist" class="tab-link button">Список</a>
-                    </div>
-                    <div class="tabs">
-                        <div class="tab tab-active" id="clinicsyandex">
-                            <div id="veterinaryclinicsmap"></div>
-                        </div>
-                        <div class="tab" id="clinicslist">
-                            <div class="clinicscards row">
-                                ${maplistdata.map((data, index) => $h`
-                                <a href="${data.link}" target="_blank" class="col-50 link external card">
-                                    <div class="name">${data.name}</div>
-                                    <div class="time" innerHTML=${data.timework}></div>
-                                    <div class="addr">${data.addr}</div>
-                                    <div class="link">Перейти на сайт</div>
-                                </a>
+<!--            <div class="sheet-modal modal-veterinary-clinics">-->
+<!--                <div class="hat"><a class="link sheet-close" href="#"></a></div>-->
+<!--                <div class="sheet-modal-inner">-->
+<!--                    <div class="info">-->
+<!--                        <div class="title">Информация о вет. клиниках</div>-->
+<!--                        <div class="desc">Мы выступаем посредником между клиниками и вами. Предоставляем сервис, где вы-->
+<!--                            в одном месте можете получить всю нужную для себя информацию-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="headmap row">-->
+<!--                        <div class="col-50">-->
+<!--                            <div class="title">Адреса</div>-->
+<!--                        </div>-->
+<!--                        <div class="col-50">-->
+<!--                            <div class="desc count">${maplist.count}</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="segmented">-->
+<!--                        <a href="#clinicsyandex" class="tab-link button tab-link-active">Карта</a>-->
+<!--                        <a href="#clinicslist" class="tab-link button">Список</a>-->
+<!--                    </div>-->
+<!--                    <div class="tabs">-->
+<!--                        <div class="tab tab-active" id="clinicsyandex">-->
+<!--                            <div id="veterinaryclinicsmap"></div>-->
+<!--                        </div>-->
+<!--                        <div class="tab" id="clinicslist">-->
+<!--                            <div class="clinicscards row">-->
+<!--                                ${maplistdata.map((data, index) => $h`-->
+<!--                                <a href="${data.link}" target="_blank" class="col-50 link external card">-->
+<!--                                    <div class="name">${data.name}</div>-->
+<!--                                    <div class="time" innerHTML=${data.timework}></div>-->
+<!--                                    <div class="addr">${data.addr}</div>-->
+<!--                                    <div class="link">Перейти на сайт</div>-->
+<!--                                </a>-->
 
-                                `)}
-                            </div>
-                        </div>
+<!--                                `)}-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                    </div>
+<!--                    </div>-->
 
-                </div>
-            </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="sheet-modal modal-veterinary-shops">-->
+<!--                <div class="hat"><a class="link sheet-close" href="#"></a></div>-->
+<!--                <div class="sheet-modal-inner">-->
+<!--                    <div class="info">-->
+<!--                        <div class="title">Информация о зоомагазинах</div>-->
+<!--                        <div class="desc">Мы выступаем посредником между зоомагазинами и вами. Предоставляем сервис, где-->
+<!--                            вы-->
+<!--                            в одном месте можете получить всю нужную для себя информацию-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="headmap row">-->
+<!--                        <div class="col-50">-->
+<!--                            <div class="title">Адреса</div>-->
+<!--                        </div>-->
+<!--                        <div class="col-50">-->
+<!--                            <div class="desc count">${mapshoplist.count}</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="segmented">-->
+<!--                        <a href="#shopsyandex" class="tab-link button tab-link-active">Карта</a>-->
+<!--                        <a href="#shopslist" class="tab-link button">Список</a>-->
+<!--                    </div>-->
+<!--                    <div class="tabs">-->
+<!--                        <div class="tab tab-active" id="shopsyandex">-->
+<!--                            <div id="veterinaryshopsmap"></div>-->
+<!--                        </div>-->
+
+<!--                        <div class="tab" id="shopslist">-->
+<!--                            <div class="clinicscards row">-->
+<!--                                ${mapshoplistdata.map((data, index) => $h`-->
+<!--                                <a href="${data.link}" target="_blank" class="col-50 link external card">-->
+<!--                                    <div class="name">${data.name}</div>-->
+<!--                                    <div class="time" innerHTML=${data.time_work}></div>-->
+<!--                                    <div class="addr">${data.address}</div>-->
+<!--                                    <div class="link">Перейти на сайт</div>-->
+<!--                                </a>-->
+
+<!--                                `)}-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
         </div>
         <div class="page promo">
             <div class="page-content">
@@ -189,14 +198,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-100 small-100 medium-100 large-100 xlarge-100">
-                                <h1 class="headTitle">Промокоды и бонусы</h1>
+                                <h1 class="headTitle">Скидки и бонусы Партнеров - Скоро будет!</h1>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="">
                     <div class="container">
-
                         <form class="filter" id="filterPromo" name="filterPromo">
                             <label class="item-checkbox item-content">
                                 <input type="checkbox" name="tags" value="1"/>
@@ -217,75 +225,173 @@
                                 </div>
                             </label>
                         </form>
-                        <div class="promolist">
-                            <div class="row">
-                                ${promolist.map((data, index) => $h`
-                                ${data.type == 1 ? $h`
-                                <a href="#" class="item huge link" data-id="${data.id}" @click=${showPromo}>
-                                    <div class="row">
-                                        <div class="col-50 whitebg">
-                                            <div class="media"
-                                                 style="background-image: url(/media/600/${data.media}.webp);"></div>
-                                        </div>
-                                        <div class="col-50 data">
-                                            <div>
-                                                <div class="name">${data.title}</div>
-                                                <div class="info">
-                                                    <div class="sale">${data.percent}%</div>
-                                                    ${data.shortdesc}
+
+                        <div class="mobile-hidden">
+                            <div class="promolist">
+                                <div class="row">
+                                    ${promolist.map((data, index) => $h`
+                                    ${data.type == 1 ? $h`
+                                    <a href="#" class="item huge link opacityHover" data-id="${data.id}">
+                                        <div class="row">
+                                            <div class="col-100 whitebg">
+                                                <div class="media"
+                                                     style="background-image: url(https://api.sergivanov.ru/media/orig/${data.media});"></div>
+                                            </div>
+                                            <div class="col-100 data">
+                                                <div>
+                                                    <div class="name">${data.title}</div>
+                                                    <div class="info">
+                                                        <div class="sale">${data.percent}%</div>
+                                                        ${data.shortdesc}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div class="more">Подробнее <img src="assets/icon_more.svg"/></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                ` : `
-                                `}
-                                ${data.type == 2 ? data.size == 1 ? $h`
-                                <a href="#" class="item small link" data-id="${data.id}" @click=${showPromo}>
-                                    <div class="row">
-                                        <div class="col-100 data">
-                                            <div>
-                                                <div class="name">${data.title}</div>
-                                                <div class="info">
-                                                    <div class="sale">${data.percent}%</div>
-                                                    ${data.shortdesc}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="more">Подробнее <img src="assets/icon_more_orange.svg"/>
+                                                <div>
+                                                    <div class="more">Скоро <img src="assets/icon_more.svg"/></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                                ` : $h`
-                                <a href="#" class="item big link" data-id="${data.id}" @click=${showPromo}>
-                                    <div class="row">
-                                        <div class="col-100 data">
-                                            <div>
-                                                <div class="name">${data.title}</div>
-                                                <div class="info">
-                                                    <div class="sale">${data.percent}%</div>
-                                                    ${data.shortdesc}
+                                    </a>
+                                    ` : `
+                                    `}
+                                    ${data.type == 2 ? data.size == 1 ? $h`
+                                    <a href="#" class="item small link opacityHover" data-id="${data.id}">
+                                        <div class="row">
+                                            <div class="col-100 data">
+                                                <div>
+                                                    <div class="name">${data.title}</div>
+                                                    <div class="info">
+                                                        <div class="sale">${data.percent}%</div>
+                                                        ${data.shortdesc}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div class="more">Подробнее <img src="assets/icon_more_orange.svg"/>
+                                                <div>
+                                                    <div class="more">Скоро <img src="assets/icon_more_orange.svg"/>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
-                                ` : `
-                                `}
-                                `)}
+                                    </a>
+                                    ` : $h`
+                                    <a href="#" class="item big link opacityHover" data-id="${data.id}">
+                                        <div class="row">
+                                            <div class="col-100 data">
+                                                <div>
+                                                    <div class="name">${data.title}</div>
+                                                    <div class="info">
+                                                        <div class="sale">${data.percent}%</div>
+                                                        ${data.shortdesc}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="more">Скоро <img src="assets/icon_more_orange.svg"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    ` : `
+                                    `}
+                                    `)}
+                                </div>
                             </div>
                         </div>
-
-
+                        <div class="desktop-hidden">
+                            <div class="promolist">
+                                <div class="row">
+                                    ${promolist.map((data, index) => $h`
+                                    ${data.type == 1 ? $h`
+                                    <a href="#" class="item link big opacityHover">
+                                        <div class="row">
+                                            <div class="col-100 whitebg" style="width: 100%;height: 250px;">
+                                                <div class="media" style="background-position: 50%;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;background-image: url(https://api.sergivanov.ru/media/orig/${data.media});"></div>
+                                            </div>
+                                            <div class="col-100 data" style="height: 250px;background-color:#eb6130;">
+                                                <div>
+                                                    <div style="color:white;font-family: 'Stratos LC Web';
+                                                               font-size: 24px;line-height: 30px;
+                                                               ">${data.title}</div>
+                                                    <div  style="color:white;font-family: 'Stratos LC Web';
+                                                               font-size: 16px;line-height: 20px;
+                                                               ">
+                                                        ${data.shortdesc}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div style="color:white;font-family: 'Stratos LC Web';
+                                                               font-size: 16px;line-height: 20px;
+                                                               ">Скоро <img src="assets/icon_more.svg"/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!--                                    <a href="#" class="item huge link opacityHover" data-id="${data.id}">-->
+                                    <!--                                        <div class="row">-->
+                                    <!--                                            <div class="col-100 whitebg">-->
+                                    <!--                                                <div class="media" style="background-image: url(https://api.sergivanov.ru/media/orig/${data.media});"></div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                            <div class="col-100 data">-->
+                                    <!--                                                <div>-->
+                                    <!--                                                    <div class="name">${data.title}</div>-->
+                                    <!--                                                    <div class="info">-->
+                                    <!--                                                        <div class="sale">${data.percent}%</div>-->
+                                    <!--                                                        ${data.shortdesc}-->
+                                    <!--                                                    </div>-->
+                                    <!--                                                </div>-->
+                                    <!--                                                <div>-->
+                                    <!--                                                    <div class="more">Скоро <img src="assets/icon_more.svg"/></div>-->
+                                    <!--                                                </div>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </a>-->
+                                    ` : `
+                                    `}
+                                    ${data.type == 2 ? data.size == 1 ? $h`
+                                    <a href="#" class="item small link opacityHover" data-id="${data.id}">
+                                        <div class="row">
+                                            <div class="col-100 data">
+                                                <div>
+                                                    <div class="name">${data.title}</div>
+                                                    <div class="info">
+                                                        <div class="sale">${data.percent}%</div>
+                                                        ${data.shortdesc}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="more">Скоро <img src="assets/icon_more_orange.svg"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    ` : $h`
+                                    <a href="#" class="item big link opacityHover" data-id="${data.id}">
+                                        <div class="row">
+                                            <div class="col-100 data">
+                                                <div>
+                                                    <div class="name">${data.title}</div>
+                                                    <div class="info">
+                                                        <div class="sale">${data.percent}%</div>
+                                                        ${data.shortdesc}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="more">Скоро <img src="assets/icon_more_orange.svg"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    ` : `
+                                    `}
+                                    `)}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -296,15 +402,15 @@
                     <div class="info">
                         <div class="title">${promo.title}</div>
                         <div class="shortdesc">
-                            <div class="sale">${promo.percent}%</div>
+                            <div class="sale"> ${promo.percent}%</div>
                             ${promo.shortdesc}
                         </div>
                         <div class="time">До ${promo.stoptextdata} (${promo.stoptext})</div>
                     </div>
                     <div class="gotocode">
-                        <div class="promocode link" code="${promo.promocode}" @click=${promocode}>
+                        <div class="promocode link" style="margin: 20px 0;" @click=${()=> promocode(promo.promocode)}>
                             <div class="label">Промокод</div>
-                            <div class="pers">${promo.percent}%</div>
+                            <div class="pers" style="margin:0 5px;"> ${promo.percent}%</div>
                             <img class="copy" src="assets/icon_copy.svg"/>
                         </div>
                         <div class="promolink"><a href="${promo.promolink}" target="_blank"
@@ -328,7 +434,6 @@
             </div>
         </div>
     </div>
-
 </template>
 <script>
 
@@ -346,14 +451,18 @@
         $onUnmounted,
         $store
     }) => {
-        let subscriptionName = 'Зоо ID';
         let promolist = [];
         let promo = [];
-
-        let missinganimalList = [];
         let maplist = [];
         let maplistdata = [];
+        let mapshoplist = [];
+        let mapshoplistdata = [];
+        let latitude = '';
+        let longitude = '';
+        let address = '';
+
         maplist['count'] = '0 адресов';
+        mapshoplist['count'] = '0 адресов';
 
         function missinganimal() {
             $f7.sheet.open('.modal-missinganimal');
@@ -361,7 +470,7 @@
 
         function showPromo(e) {
             app.preloader.show();
-            getid = e.target.getAttribute('data-id');
+            let getid = e.target.getAttribute('data-id');
             app.request.postJSON(apiServer + 'promo', {id: getid}).then(function (res) {
                 if (res.data) {
                     if (res.data.err) {
@@ -369,7 +478,7 @@
                         $store.dispatch('msgalert', {err: res.data.err});
                     } else {
                         app.preloader.hide();
-                        data = res.data;
+                        let data = res.data;
 
 
                         data.stoptext = moment(data.stop, "YYYYMMDD").fromNow();
@@ -397,7 +506,7 @@
                         app.preloader.hide();
                         $store.dispatch('msgalert', {err: res.data.err});
                     } else {
-                        data = res.data;
+                        let data = res.data;
                         promolist = data;
                         $update();
                         app.preloader.hide();
@@ -409,9 +518,8 @@
             });
         }
 
-        function promocode(e) {
-            getcode = e.target.getAttribute('code');
-            navigator.clipboard.writeText(getcode)
+        function promocode(code) {
+            navigator.clipboard.writeText(code)
                 .then(
                     () => $store.dispatch('msgalert', {err: 'Промокод успешно скопирован.'})
                 ).catch(
@@ -422,8 +530,16 @@
         function sendMissinganimal() {
             let formData = $f7.form.convertToData('#missinganimal');
 
-            let shortdesc = $f7.textEditor.get('#missinganimal .missinganimaltext');
-            formData['text'] = shortdesc.value;
+            if ($('[name="address"]').val() === '') {
+                $f7.store.dispatch('toast', {
+                    text: 'Заполните поле адрес.'
+                });
+                return false;
+            }
+
+            formData['longitude'] = longitude;
+            formData['latitude'] = latitude;
+            formData['address'] = address;
 
             fetch(apiServer + 'services/missinganimal', {
                 method: 'POST',
@@ -447,36 +563,151 @@
                 });
         }
 
-        function getMyMissinganimal() {
-            fetch(apiServer + 'services/mymissinganimal', {
-                method: 'POST',
-                body: JSON.stringify(),
-                headers: headers()
-            })
-                .then((res) => res.json())
-                .then(function (data) {
-                    if (data.err) {
-                    } else {
-                        missinganimalList = data;
-                        for (var k in missinganimalList) {
-                            if (missinganimalList[k]) {
-                                if (missinganimalList[k].create) {
-                                    missinganimalList[k].date = moment(missinganimalList[k].create, "YYYYMMDD").format('D MMMM YYYY');
-                                }
+        function showVeterinaryShops() {
+            $f7.sheet.open('.modal-veterinary-shops');
+            ymaps.option.presetStorage.add('my#mapbase', {
+                iconImageHref: 'assets/icon_map.svg',
+                iconImageSize: [30, 40],
+                iconLayout: 'default#image'
+            });
+            ymaps.option.presetStorage.add('my#mapislands', {
+                iconImageHref: 'assets/icon_map_islands.svg',
+                iconImageSize: [40, 40],
+                iconLayout: 'default#image'
+            });
+            if ($('#veterinaryshopsmap > ymaps').length) {
+            } else {
+                if (typeof myMap === 'undefined') {
+
+                    var geolocation = ymaps.geolocation,
+                        myMap = new ymaps.Map('veterinaryshopsmap', {
+                            center: [53.905971, 27.556458],
+                            zoom: 10
+                        }, {
+                            searchControlProvider: 'yandex#search'
+                        });
+
+
+                    geolocation.get({
+                        provider: 'browser',
+                        mapStateAutoApply: true
+                    }).then(function (result) {
+                        // Синим цветом пометим положение, полученное через браузер.
+                        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+                        result.geoObjects.options.set('preset', 'my#maphidden');
+                        myMap.geoObjects.add(result.geoObjects);
+                    });
+
+                    let objectManager = new ymaps.ObjectManager({
+                        // Чтобы метки начали кластеризоваться, выставляем опцию.
+                        clusterize: true,
+                        // ObjectManager принимает те же опции, что и кластеризатор.
+                        gridSize: 64,
+                        clusterDisableClickZoom: true
+                    });
+
+
+                    objectManager.objects.options.set('preset', 'my#mapbase');
+                    objectManager.clusters.options.set('preset', 'islands#orangeClusterIcons');
+
+
+                    myMap.geoObjects.add(objectManager);
+
+                    // Создаем геообъект с типом геометрии "Точка".
+                    let myGeoObject = new ymaps.GeoObject({
+                        // Описание геометрии.
+                        geometry: {
+                            type: "Point",
+                            coordinates: [53.905971, 27.556458]
+                        },
+                    }, {
+                        // Опции.
+                        // Иконка метки будет растягиваться под размер ее содержимого.
+                        preset: 'islands#blackStretchyIcon',
+                        // Метку можно перемещать.
+                        draggable: true
+                    });
+
+
+                    fetch(apiServer + 'pet-shops/list', {
+                        method: 'POST',
+                        body: JSON.stringify(),
+                        headers: headers()
+                    })
+                        .then((res) => res.json())
+                        .then(function (data) {
+                            if (data.err) {
+                            } else {
+                                let shopdata = data.features;
+                                mapshoplist['count'] = shopdata.length + ' ' + declOfNum(shopdata.length, ['адрес', 'адреса', 'адресов']);
+                                mapshoplistdata = shopdata;
+                                objectManager.add(data);
+                                $update();
                             }
-                        }
-                        $update();
+                        });
+
+                } else {
+                }
+            }
+        }
+
+        function loadmap() {
+            let mapCenter = [53.905971, 27.556458];
+
+            let zoom = 12;
+
+            var map = new ymaps.Map('missingpetmap', {
+                center: mapCenter,
+                zoom: zoom
+            }, {
+                searchControlNoPlacemark: true
+            });
+
+            ymaps.modules.require([
+                'GeoObjectEditor',
+                'MapStateInfo',
+                'DemoControl'
+            ]).spread(function (GeoObjectEditor, MapStateInfo, DemoControl) {
+                map.controls.add(new DemoControl({coordOrder: coordOrder}));
+            });
+
+            map.events.add('click', function (e) {
+                if (!map.balloon.isOpen()) {
+                    var coords = e.get('coords');
+                    latitude = coords[0].toPrecision(8);
+                    longitude = coords[1].toPrecision(8);
+
+
+                    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords[0].toPrecision(8)}&lon=${coords[1].toPrecision(8)}`;
+
+                    try {
+                        getAddressFromCoords(coords[0].toPrecision(8), coords[1].toPrecision(8)).then(function (str) {
+                            address = str;
+                            map.balloon.open(coords, {
+                                contentHeader: 'Адрес где пропал питомец',
+                                contentBody: '' +
+                                    '<p>Данные точки: ' + str + '</p>',
+                            });
+                            $update();
+                        });
+                    } catch (error) {
+                        console.error('Ошибка:', error);
+                        return null;
                     }
-                });
+                    $update();
+
+                } else {
+                    map.balloon.close();
+                }
+            });
+
+            map.events.add('balloonopen', function (e) {
+                map.hint.close();
+            });
         }
 
         function showVeterinaryClinics() {
             $f7.sheet.open('.modal-veterinary-clinics');
-            ymaps.option.presetStorage.add('my#maphidden', {
-                iconImageHref: 'assets/icon_maphidden.svg',
-                iconImageSize: [10, 10],
-                iconLayout: 'default#image'
-            });
             ymaps.option.presetStorage.add('my#mapbase', {
                 iconImageHref: 'assets/icon_map.svg',
                 iconImageSize: [30, 40],
@@ -488,14 +719,12 @@
                 iconLayout: 'default#image'
             });
             if ($('#veterinaryclinicsmap > ymaps').length) {
-
             } else {
-
                 if (typeof myMap === 'undefined') {
 
                     var geolocation = ymaps.geolocation,
                         myMap = new ymaps.Map('veterinaryclinicsmap', {
-                            center: [53.894, 27.554],
+                            center: [53.905971, 27.556458],
                             zoom: 10
                         }, {
                             searchControlProvider: 'yandex#search'
@@ -564,20 +793,39 @@
 
                 } else {
                 }
-
-
             }
-
         }
 
         $on("pageInit", function (e, page) {
+
+            if (!$f7.form.getFormData('token')) {
+                location.href = '/login'
+            }
+
             startLoadPromo();
 
+            setTimeout(function (){
+                loadmap();
+            }, 1000)
+
             $('#filterPromo [name="tags"]').on('change', function (e) {
-                console.log(1)
                 startLoadPromo();
             });
         });
+
+        async function getAddressFromCoords(lat, lng) {
+            const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+            try {
+                const response = await fetch(url, {headers: {'User-Agent': 'MyApp'}});
+                const data = await response.json();
+                return data.display_name || 'Адрес не найден';
+            } catch (error) {
+                console.error('Ошибка:', error);
+                return null;
+            }
+        }
+
 
         return $render;
     }

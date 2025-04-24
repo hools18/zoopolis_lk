@@ -1,617 +1,731 @@
 <template>
     <div class="page subscription">
-		<div class="page-content">
-			<div class="fixpad">
-				<div class="container">
+        <div class="page-content">
+            <div class="fixpad">
+                <div class="container">
 
-					<div class="row">
-						<div class="col-100 small-100 medium-50 large-50 xlarge-50">
-							<div class="listCard">
-								<div class="box">
-									<h1 class="headTitleSub">Оформление подписки</h1>
-								</div>
-								<div class="box">
-									<div class="name">Способы оплаты</div>
-									<form class="dataForm row" id="userPay" name="userPay">
+                    <div class="row">
+                        <div class="col-100 small-100 medium-50 large-50 xlarge-50">
+                            <div class="listCard">
+                                <div class="box">
+                                    <h1 class="headTitleSub">Оформление подписки</h1>
+                                </div>
+                                <div class="box">
+                                    <div class="name" style="font-size: 30px; line-height: 30px">Контактные данные
+                                    </div>
+                                    <form class="dataForm row" id="userData" name="userData">
 
-										<div class="col-100 medium-50 large-50 xlarge-50">
-											<label class="item-checkbox item-content" @click=${selectPayA}>
-												<input type="checkbox" name="online" value="1" checked/>
-												<i class="icon icon-checkbox"></i>
-												<div class="item-inner">
-													<div class="item-title">Онлайн-оплата картой</div>
-												</div>
-											</label>
-										</div>
-										<div class="col-100 medium-50 large-50 xlarge-50">
-											<label class="item-checkbox item-content" @click=${selectPayB}>
-												<input type="checkbox" name="erip" value="1" />
-												<i class="icon icon-checkbox"></i>
-												<div class="item-inner">
-													<div class="item-title">Ерип</div>
-												</div>
-											</label>
-										</div>
-									</form>
-								</div>
-								<div class="box">
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Имя <span style="color: red">*</span></div>
+                                            <label data-err="${userDataError.first}">
+                                                <input class="input" name="first" type="text" placeholder="Имя"
+                                                       maxlength="20"
+                                                       value="${profile.first}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Фамилия <span style="color: red">*</span></div>
+                                            <label data-err="${userDataError.last}">
+                                                <input class="input" name="last" type="text" placeholder="Фамилия"
+                                                       maxlength="20"
+                                                       value="${profile.last}"/>
+                                            </label>
+                                        </div>
+                                    </form>
+                                    <div class="notice">
+                                        <div><img src="assets/icon_notice.svg"/></div>
+                                        <div class="info" style="width: 370px;">Не забудьте заполнить адрес, он нам нужен, чтобы отправить вам кулон для питомца
+                                        </div>
+                                    </div>
+                                    <div class="name" style="font-size: 30px; line-height: 30px">Адрес</div>
+                                    <form class="dataForm row" id="userAddress" name="userAddress">
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Город <span style="color: red">*</span></div>
+                                            <label data-err="${userAddressError.city}">
+                                                <input class="input" name="city" type="text" placeholder="Город"
+                                                       maxlength="20"
+                                                       value="${address.city}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Улица и дом <span style="color: red">*</span></div>
+                                            <label data-err="${userAddressError.street}">
+                                                <input class="input" name="street" type="text" maxlength="40"
+                                                       placeholder="Улица и номер дома" value="${address.street}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Подъезд <span style="color: red">*</span></div>
+                                            <label data-err="${userAddressError.entrance}">
+                                                <input class="input js-input-absint" name="entrance" type="number"
+                                                       min="1"
+                                                       placeholder="Номер подъезда" value="${address.entrance}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Квартира <span style="color: red">*</span></div>
+                                            <label data-err="${userAddressError.apartment}">
+                                                <input class="input js-input-absint" name="apartment" type="number"
+                                                       min="1"
+                                                       placeholder="Номер квартиры" value="${address.apartment}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Этаж <span style="color: red">*</span></div>
+                                            <label data-err="${userAddressError.floor}">
+                                                <input class="input js-input-absint" name="floor"
+                                                       type="number"
+                                                       min="1"
+                                                       placeholder="Этаж" value="${address.floor}"/>
+                                            </label>
+                                        </div>
+                                    </form>
+                                    <div class="name" style="font-size: 30px; line-height: 30px">Информация о
+                                        питомце
+                                    </div>
+                                    <form class="dataForm row" id="userPets" name="userPets">
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <div class="name">Кличка питомца</div>
+                                            <label data-err="${userPetsError.name}">
+                                                <input class="input" name="name" type="text"
+                                                       maxlength="20"
+                                                       placeholder="Кличка питомца" value="${pets.name}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50 zoneEntrance">
+                                            <div class="name">Возраст</div>
+                                            <label data-err="${userPetsError.age}">
+                                                <input class="input" name="ageText" type="text"
+                                                       placeholder="Возраст питомца" value="${pets.ageText}"
+                                                       disabled/>
+                                                <div class="range-slider range-slider-init color-black petsAge"
+                                                     data-label="true">
+                                                    <input class="" type="range" name="age" min="0" max="20"
+                                                           step="1" value="${pets.age}" @input=${onAge}/>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="row obj" style="    display: contents;">
+                                            <div class="col-100 medium-50 large-50 xlarge-50">
+                                                <div class="name">Пол</div>
 
-									<div class="name">Условия подписки</div>
-									<div class="notice">
-										<div><img src="assets/icon_notice.svg"/></div>
-										<div class="info">Подписка на 3 месяца при оформлении услуги ZOO ID обязательна.<br/>По истечению 3 месяцев вы сможете изменить условия подписки в ЛК.</div>
-									</div>
+                                                <label class="item-checkbox item-content" @click=${selectMale}>
+                                                    <input type="checkbox" name="male" value="1" checked/>
+                                                    <i class="icon icon-checkbox"></i>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Мужской</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                            <div class="col-100 medium-50 large-50 xlarge-50 minmtop">
+                                                <div class="name" style="opacity: 0;">*</div>
+                                                <label class="item-checkbox item-content" @click=${selectFemale}>
+                                                    <input type="checkbox" name="female" value="1"/>
+                                                    <i class="icon icon-checkbox"></i>
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Женский</div>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-100 fullw">
+                                            <div class="name">Порода</div>
+                                            <label data-err="${userPetsError.breed}">
+                                                <input class="input" name="breed"
+                                                       maxlength="20" type="text" placeholder="Порода"
+                                                       value="${pets.breed}"/>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 fullw">
+                                            <div class="name">Комментарий</div>
+                                            <label data-err="${userPetsError.comm}">
+                                                <textarea name="comm" maxlength="500">${pets.comm}</textarea>
+                                            </label>
+                                        </div>
+                                    </form>
+                                    <div class="name">Способы оплаты</div>
+                                    <form class="dataForm row" id="userPay" name="userPay">
 
-									<form class="dataForm row" id="userPeriod" name="userPeriod">
-										<select name="type" style="display: none;">
-											<option value="zooid" selected="selected">zooid</option>
-											<option value="concierge">concierge</option>
-											<option value="zoopolis">zoopolis</option>
-										</select>
-										<input type="number" name="type" value="${props.id}" style="display: none;"/>
-										<div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodA}>
-											<label class="item-checkbox item-content">
-												<input type="checkbox" name="period" value="1" />
-												<i class="icon icon-checkbox"></i>
-												<div class="item-inner">
-													<div class="item-title">1 месяц</div>
-												</div>
-											</label>
-										</div>
-										<div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodB}>
-											<label class="item-checkbox item-content">
-												<input type="checkbox" name="period" value="6" checked/>
-												<i class="icon icon-checkbox"></i>
-												<div class="item-inner">
-													<div class="item-title">6 месяцев</div>
-												</div>
-											</label>
-										</div>
-										<div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodC}>
-											<label class="item-checkbox item-content">
-												<input type="checkbox" name="period" value="12" />
-												<i class="icon icon-checkbox"></i>
-												<div class="item-inner">
-													<div class="item-title">12 месяцев</div>
-												</div>
-											</label>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="col-100 small-100 medium-40 large-40 xlarge-40 sticky">
-							<div >
-							<div id="finalBlock" class="finalBlock ">
-								<div>
-									<div class="name">Промокод</div>
-									<form class="dataForm row" id="promocode" name="promocode">
-										<div class="col-60">
-											<label data-err="${promocode.code}">
-												<input class="input" name="code" type="text" placeholder="Введите промокод" required/>
-											</label>
-										</div>
-										<div class="col-40">
-											<a href="#" class="button button-outline button-round" @click=${checkPromocode}>Применить</a>
-										</div>
-									</form>
-								</div>
-								<div>
-									<div class="name">${subName}</div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <label class="item-checkbox item-content" @click=${selectPayA}>
+                                                <input type="checkbox" name="online" value="1" checked/>
+                                                <i class="icon icon-checkbox"></i>
+                                                <div class="item-inner">
+                                                    <div class="item-title">Онлайн-оплата картой</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="col-100 medium-50 large-50 xlarge-50">
+                                            <label class="item-checkbox item-content" @click=${selectPayB}>
+                                                <input type="checkbox" name="erip" value="1"/>
+                                                <i class="icon icon-checkbox"></i>
+                                                <div class="item-inner">
+                                                    <div class="item-title">Ерип</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="box">
 
-									${props.id == '1' ? $h`
-										<div class="graytext sheet-open" data-sheet=".modal-subscription-configs-ZooID"><div>Что входит в услугу ${subName}</div> <img src="assets/icon_arrow_down.svg"/></div>
+                                    <div class="name">Условия подписки</div>
+                                    <div class="notice">
+                                        <div><img src="assets/icon_notice.svg"/></div>
+                                        <div class="info">Подписка на 3 месяца при оформлении услуги ZOO ID обязательна.<br/>По
+                                            истечению 3 месяцев вы сможете изменить условия подписки в ЛК.
+                                        </div>
+                                    </div>
 
-										<div class="othersubs sheet-open" data-sheet=".modal-subscription-configs-ZooID"><a href="#" class="button button-outline button-round">Заменить услугу</a></div>
-									` : $h`
+                                    <form class="dataForm row" id="userPeriod" name="userPeriod">
+                                        <select name="type" style="display: none;">
+                                            <option value="zooid" selected="selected">zooid</option>
+                                            <option value="concierge">concierge</option>
+                                            <option value="zoopolis">zoopolis</option>
+                                        </select>
+                                        <input type="number" name="type" value="1" style="display: none;"/>
+                                        <div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodA}>
+                                            <label class="item-checkbox item-content">
+                                                <input type="checkbox" name="period" value="3" checked/>
+                                                <i class="icon icon-checkbox"></i>
+                                                <div class="item-inner">
+                                                    <div class="item-title">3 месяца</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <!--                                        <div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodB}>-->
+                                        <!--                                            <label class="item-checkbox item-content">-->
+                                        <!--                                                <input type="checkbox" name="period" value="6" />-->
+                                        <!--                                                <i class="icon icon-checkbox"></i>-->
+                                        <!--                                                <div class="item-inner">-->
+                                        <!--                                                    <div class="item-title">6 месяцев</div>-->
+                                        <!--                                                </div>-->
+                                        <!--                                            </label>-->
+                                        <!--                                        </div>-->
+                                        <div class="col-100 medium-50 large-50 xlarge-50" @click=${selectuserPeriodC}>
+                                            <label class="item-checkbox item-content">
+                                                <input type="checkbox" name="period" value="12"/>
+                                                <i class="icon icon-checkbox"></i>
+                                                <div class="item-inner">
+                                                    <div class="item-title">12 месяцев</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
-									`}
-
-									${props.id == '2' ? $h`
-										<div class="graytext sheet-open" data-sheet=".modal-subscription-configs-concierge"><div>Что входит в услугу Зооконсьерж</div> <img src="assets/icon_arrow_down.svg"/></div>
-
-										<div class="othersubs sheet-open" data-sheet=".modal-subscription-configs-concierge"><a href="#" class="button button-outline button-round">Заменить услугу</a></div>
-									` : $h`
-
-									`}
-									${props.id == '3' ? $h`
-										<div class="graytext sheet-open" data-sheet=".modal-subscription-configs-concierge"><div>Что входит в услугу Зоополис</div> <img src="assets/icon_arrow_down.svg"/></div>
-									` : $h`
-
-									`}
+                        <div class="col-100 small-100 medium-40 large-40 xlarge-40 sticky">
+                            <div>
+                                <div id="finalBlock" class="finalBlock ">
+                                    <div>
+                                        <div class="name">${subName}</div>
 
 
+                                        <div class="graytext sheet-open" data-sheet=".modal-subscription-configs-ZooID">
+                                            <div>Что входит в услугу ${subName}</div>
+                                            <img src="assets/icon_arrow_down.svg"/></div>
+
+                                        <div class="othersubs sheet-open"
+                                             data-sheet=".modal-subscription-configs-ZooID">
+                                            <a href="#" class="button button-outline button-round">Показать услугу</a>
+                                        </div>
 
 
-								</div>
-								<div>
-									<div class="price">
-										<div>
-											<div class="label">Итого к оплате</div>
-											<div class="data">${price.pricebase} ${price.currency}</div>
-										</div>
-										<div>
-											<div class="label">Доставка</div>
-											<div class="data">Бесплатно</div>
-										</div>
-									</div>
+                                    </div>
+                                    <div>
+                                        <div class="price">
+                                            <div>
+                                                <div class="label">Итого к оплате</div>
+                                                <div class="data">${price.pricebase} ${price.currency}</div>
+                                            </div>
+                                            <div>
+                                                <div class="label">Доставка</div>
+                                                <div class="data">Бесплатно</div>
+                                            </div>
+                                        </div>
 
-								</div>
-								<div><a href="#" class="col button button-fill" @click=${buy}>Оформить подписку <img src="assets/icon_more.svg"/></a></div>
-							</div>
-							</div>
-						</div>
-					</div>
+                                    </div>
+                                    <div><a href="#" class="col button button-fill" @click=${buy}>Оформить подписку <img
+                                            src="assets/icon_more.svg"/></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-				</div>
-			</div>
+                </div>
+            </div>
 
 
-			<div class="sheet-modal modal-subscription-configs-ZooID">
-				<div class="hat"><a class="link sheet-close" href="#"></a></div>
-				<div class="sheet-modal-inner">
-					<div class="modal-title">Настройка подписки</div>
-
-					<form class="configslist" id="configZooID" name="configZooID">
-						<input type="checkbox" name="zooid" value="1" checked style="display:none;"/>
-						${zooIDConf.map((data, index) => $h`
-						<div>
-							<label class="item-checkbox item-content">
-								<input type="checkbox" name="zooid" value="${data.id}"  @click=${()=> zooIDConfUpdate()} checked/> <i class="icon icon-checkbox"></i>
-								<div class="item-inner">
-									<div class="item-title">${data.name}</div>
-								</div>
-							</label>
-						</div>
-						`)}
-					</form>
-
-				</div>
-			</div>
-			<div class="sheet-modal modal-subscription-configs-concierge">
-				<div class="hat"><a class="link sheet-close" href="#"></a></div>
-				<div class="sheet-modal-inner">
-					<div class="modal-title">Настройка подписки</div>
-
-					<form class="configslist" id="configConcierge" name="configConcierge">
-						<input type="checkbox" name="concierge" value="1" checked style="display:none;"/>
-						${conciergeConf.map((data, index) => $h`
-
-						<div>
-							<label class="item-checkbox item-content">
-								<input type="checkbox" name="concierge" value="${data.id}"  @click=${()=> conciergeConfUpdate()} checked/> <i class="icon icon-checkbox"></i>
-								<div class="item-inner">
-									<div class="item-title">${data.name}</div>
-								</div>
-							</label>
-						</div>
-						`)}
-					</form>
-
-				</div>
-			</div>
-		</div>
-
+            <div class="sheet-modal modal-subscription-configs-ZooID">
+                <div class="hat"><a class="link sheet-close" href="#"></a></div>
+                <div class="sheet-modal-inner">
+                    <div class="modal-title">Описание подписки</div>
+                    <form class="configslist" id="configZooID" name="configZooID">
+                        <input type="checkbox" name="zooid" value="1" checked style="display:none;"/>
+                        <div>
+                            <ul class="subscribe-list-services"
+                                style="color: black; list-style: none;">
+                                ${zooIDConf.map((data, index) => $h`
+                                <li>${data.name}</li>
+                                `)}
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
-export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onMounted, $onBeforeUpdate, $onUpdated, $onBeforeUnmount, $onUnmounted, $store, $context}) => {
-	let subscriptionName = '';
-	let subName = '';
-	switch(parseInt(props['id'])) {
-		case 1:  // if (x === 'value1')
-			$f7.store.dispatch('toast', {
-				text: 'Выбрана подписка ЗооID.'
-			});
-			subscriptionName = 'Зоо ID';
-			subName = 'Зоо ID';
-		break;
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        let subscriptionName = '';
+        let subName = '';
 
-		case 2:  // if (x === 'value2')
-			$f7.store.dispatch('toast', {
-				text: 'Выбрана подписка Зооконсьерж.'
-			});
-			subscriptionName = 'Зооконсьерж';
-			subName = 'Зооконсьерж';
+        $f7.store.dispatch('toast', {
+            text: 'Выбрана подписка ЗооID.'
+        });
+        subscriptionName = 'Зоо ID';
+        subName = 'Зоо ID';
 
-		break;
-		case 3:  // if (x === 'value2')
-			$f7.store.dispatch('toast', {
-				text: 'Выбрана подписка Зоополис.'
-			});
-			subscriptionName = 'Зоополис';
-			subName = 'Зоополис';
 
-		break;
+        let profile = [];
+        let address = [];
+        let pets = [];
+        let promocode = [];
 
-		default:
-			alert('ОШИБКА!');
-		break;
-	}
+        let userDataError = [];
+        let userAddressError = [];
+        let userPetsError = [];
 
-	let profile = [];
-	let address = [];
-	let pets = [];
-	let promocode = [];
+        let price = {
+            "period": "6",
+            "pricebase": 0,
+            "currency": "BYN"
+        };
 
-	let userDataError = [];
-	let userAddressError = [];
-	let userPetsError = [];
+        let zooIDConf = [];
+        let conciergeConf = [];
 
-	let price = {
-		"period": "6",
-		"pricebase": 0,
-		"currency": "BYN"
-	};
 
-	let zooIDConf = [];
-	let conciergeConf = [];
-	function checkPromocode(){
+        function zooIDConfUpdate() {
+            getPrice();
+        }
 
-	}
-	function togleSubs(){
+        function conciergeConfUpdate() {
+            getPrice();
+        }
 
-	}
-	function zooIDConfUpdate(){
-		getPrice();
-	}
-	function conciergeConfUpdate(){
-		getPrice();
-	}
-	const onAge = (e) => {
-		$store.dispatch('getNoun',{
-			number: e.target.value,
-			one: 'год',
-			two: 'года',
-			five: 'лет'
-		}).then(function(text) {
-			if(text){
-				pets.ageText = e.target.value+' '+text;
-				$update();
-			}
-		});
+        const onAge = (e) => {
+            $store.dispatch('getNoun', {
+                number: e.target.value,
+                one: 'год',
+                two: 'года',
+                five: 'лет'
+            }).then(function (text) {
+                if (text) {
+                    pets.ageText = e.target.value + ' ' + text;
+                    $update();
+                }
+            });
 
-    };
-	function selectMale(){
-		document.querySelectorAll('#userPets input[name="female"]')[0].checked = false;
-		document.querySelectorAll('#userPets input[name="male"]')[0].checked = true;
+        };
 
-	};
-	function selectFemale(){
-		document.querySelectorAll('#userPets input[name="male"]')[0].checked = false;
-		document.querySelectorAll('#userPets input[name="female"]')[0].checked = true;
+        function selectMale() {
+            document.querySelectorAll('#userPets input[name="female"]')[0].checked = false;
+            document.querySelectorAll('#userPets input[name="male"]')[0].checked = true;
 
-	};
-	function selectPayA(){
-		document.querySelectorAll('#userPay input[name="online"]')[0].checked = true;
-		document.querySelectorAll('#userPay input[name="erip"]')[0].checked = false;
+        };
 
-	};
-	function selectPayB(){
-		document.querySelectorAll('#userPay input[name="erip"]')[0].checked = true;
-		document.querySelectorAll('#userPay input[name="online"]')[0].checked = false;
+        function selectFemale() {
+            document.querySelectorAll('#userPets input[name="male"]')[0].checked = false;
+            document.querySelectorAll('#userPets input[name="female"]')[0].checked = true;
 
-	};
+        };
 
-	function getPrice(){
+        function selectPayA() {
+            document.querySelectorAll('#userPay input[name="online"]')[0].checked = true;
+            document.querySelectorAll('#userPay input[name="erip"]')[0].checked = false;
 
-		formData = $f7.form.convertToData('.page-current #userPeriod');
+        };
 
-		uZooID = $f7.form.convertToData('.page-current #configZooID');
-		if(uZooID){
-		} else {
-			uZooID = $f7.form.convertToData('.modal-in #configZooID');
-		}
-		uConcierge = $f7.form.convertToData('.page-current #configConcierge');
-		if(uConcierge){
-		} else {
-			uConcierge = $f7.form.convertToData('.modal-in #configConcierge');
-		}
-		formData['configZooID'] = uZooID;
-		formData['configConcierge'] = uConcierge;
-		fetch(apiServer+'subscribe/price', {
-			method: 'POST',
-			body: JSON.stringify(formData),
-			headers: headers()
-		})
-		.then((res) => res.json())
-		.then(function (data) {
-			if(data.err){
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {
-					err: data.err
-				});
-			} else {
-				price = data;
-				$update();
-			}
-		});
-	}
-	function selectuserPeriodA(){
-		document.querySelectorAll('#userPeriod input[value="1"]')[0].checked = true;
-		document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = false;
-		document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = false;
-		getPrice();
-	};
-	function selectuserPeriodB(){
-		document.querySelectorAll('#userPeriod input[value="1"]')[0].checked = false;
-		document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = true;
-		document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = false;
-		getPrice();
-	};
-	function selectuserPeriodC(){
-		document.querySelectorAll('#userPeriod input[value="1"]')[0].checked = false;
-		document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = false;
-		document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = true;
-		getPrice();
-	};
-	function selectuserPeriodType(){
-		formData = $f7.form.convertToData('.page-current #userPeriod');
-		switch(parseInt(props['id'])) {
-			case 1:  // if (x === 'value1')
-				document.querySelector('#userPeriod select[name="type"]').value = 'zooid';
-				subName = 'Зоо ID';
-			break;
+        function selectPayB() {
+            document.querySelectorAll('#userPay input[name="erip"]')[0].checked = true;
+            document.querySelectorAll('#userPay input[name="online"]')[0].checked = false;
 
-			case 2:  // if (x === 'value2')
-				document.querySelector('#userPeriod select[name="type"]').value = 'concierge';
-				subName = 'Зооконсьерж';
+        };
 
-			break;
-			case 3:  // if (x === 'value2')
-				document.querySelector('#userPeriod select[name="type"]').value = 'zoopolis';
-				subName = 'Зоополис';
+        function getPrice() {
 
-			break;
+            formData = $f7.form.convertToData('.page-current #userPeriod');
 
-			default:
-				alert('ОШИБКА!');
-			break;
-		}
-		getPrice();
-	};
+            uZooID = $f7.form.convertToData('.page-current #configZooID');
+            if (uZooID) {
+            } else {
+                uZooID = $f7.form.convertToData('.modal-in #configZooID');
+            }
+            uConcierge = $f7.form.convertToData('.page-current #configConcierge');
+            if (uConcierge) {
+            } else {
+                uConcierge = $f7.form.convertToData('.modal-in #configConcierge');
+            }
+            formData['configZooID'] = uZooID;
+            formData['configConcierge'] = uConcierge;
+            fetch(apiServer + 'subscribe/price', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: headers()
+            })
+                .then((res) => res.json())
+                .then(function (data) {
+                    if (data.err) {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {
+                            err: data.err
+                        });
+                    } else {
+                        price = data;
+                        $update();
+                    }
+                });
+        }
 
-	function addMorePhone(e){
-		const phone = new String(e.target.getAttribute('data-phone'));
-		profile['phone_other_'+phone] = "+7";
-		console.log(profile);
-		$update();
-	};
-	function buy(){
-		$f7.preloader.show();
-		$f7.store.dispatch('toast', {
-			text: 'Сохраняем пользовательские формы.'
-		});
+        function selectuserPeriodA() {
+            document.querySelectorAll('#userPeriod input[value="3"]')[0].checked = true;
+            // document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = false;
+            document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = false;
+            getPrice();
+        };
 
-		var formData = $f7.form.convertToData('.page-current #userData');
-		$f7.request.postJSON(apiServer+'user/savedata', formData).then(function (res) {
-			if(res.data){
-				if(res.data.error){
-					$f7.preloader.hide();
-					$store.dispatch('msgalert', {
-						err: res.data.error
-					});
-				} else {
-					$f7.preloader.hide();
-					$f7.store.dispatch('toast', {
-						text: 'Контактные данные - Сохранено.'
-					});
-				}
+        function selectuserPeriodB() {
+            document.querySelectorAll('#userPeriod input[value="3"]')[0].checked = false;
+            // document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = true;
+            document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = false;
+            getPrice();
+        };
 
-			} else {
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
-			}
+        function selectuserPeriodC() {
+            document.querySelectorAll('#userPeriod input[value="3"]')[0].checked = false;
+            // document.querySelectorAll('#userPeriod input[value="6"]')[0].checked = false;
+            document.querySelectorAll('#userPeriod input[value="12"]')[0].checked = true;
+            getPrice();
+        };
 
-		});
+        function selectuserPeriodType() {
+            document.querySelector('#userPeriod select[name="type"]').value = 'zooid';
+            subName = 'Зоо ID';
+            getPrice();
+        }
 
-		var formData = $f7.form.convertToData('.page-current #userAddress');
-		$f7.request.postJSON(apiServer+'user/savedataaddress', formData).then(function (res) {
-			if(res.data){
-				if(res.data.error){
-					$f7.preloader.hide();
-					$store.dispatch('msgalert', {
-						err: res.data.error
-					});
-				} else {
-					$f7.preloader.hide();
-					$f7.store.dispatch('toast', {
-						text: 'Адрес - Сохранено.'
-					});
-				}
+        function buy() {
+            let valid = true;
+            $f7.preloader.show();
+            $f7.store.dispatch('toast', {
+                text: 'Сохраняем пользовательские формы.'
+            });
 
-			} else {
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
-			}
 
-		});
-		var formData = $f7.form.convertToData('.page-current #userPets');
-		$f7.request.postJSON(apiServer+'user/savedatapets', formData).then(function (res) {
-			if(res.data){
-				if(res.data.error){
-					$f7.preloader.hide();
-					$store.dispatch('msgalert', {
-						err: res.data.error
-					});
-				} else {
-					$f7.preloader.hide();
-					$f7.store.dispatch('toast', {
-						text: 'Информация о питомце - Сохранено'
-					});
-				}
+            let formDataUser = $f7.form.convertToData('.page-current #userData');
+            let formAddressUser = $f7.form.convertToData('.page-current #userAddress');
 
-			} else {
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
-			}
+            if (formDataUser.first.length <= 3) {
+                valid = false;
+                userDataError['first'] = 'Обязательно для заполнения';
+            } else {
+                userDataError['first'] = '';
+            }
 
-		});
+            if (formDataUser.last.length <= 3) {
+                valid = false;
+                userDataError['last'] = 'Обязательно для заполнения';
+            } else {
+                userDataError['last'] = '';
+            }
 
-		$store.dispatch('checkToken').then(function(checkToken) {
-			if(checkToken == true){
-				profile = $store.state.profile;
-				address = $store.state.address;
-				pets = $store.state.pets;
-				if(pets.age){
-					$store.dispatch('getNoun',{
-						number: pets.age,
-						one: 'год',
-						two: 'года',
-						five: 'лет'
-					}).then(function(text) {
-						if(text){
-							pets.ageText = pets.age+' '+text;
-							$f7.range.setValue('#userPets .petsAge', pets.age)
-							$update();
-						}
-					});
-				}
+            if (formAddressUser.city.length <= 3) {
+                valid = false;
+                userAddressError['city'] = 'Обязательно для заполнения';
+            } else {
+                userAddressError['city'] = '';
+            }
 
-				$update();
-				$f7.preloader.hide();
-			}
-		});
+            if (formAddressUser.street.length <= 3) {
+                valid = false;
+                userAddressError['street'] = 'Обязательно для заполнения';
+            } else {
+                userAddressError['street'] = '';
+            }
 
-		let createsub = {};
+            if (formAddressUser.entrance.length == 0) {
+                valid = false;
+                userAddressError['entrance'] = 'Обязательно для заполнения';
+            } else {
+                userAddressError['entrance'] = '';
+            }
+            if (formAddressUser.apartment.length == 0) {
+                valid = false;
+                userAddressError['apartment'] = 'Обязательно для заполнения';
+            } else {
+                userAddressError['apartment'] = '';
+            }
+            if (formAddressUser.floor.length == 0) {
+                valid = false;
+                userAddressError['floor'] = 'Обязательно для заполнения';
+            } else {
+                userAddressError['floor'] = '';
+            }
 
-		userPeriod = $f7.form.convertToData('.page-current #userPeriod');
-		userPay = $f7.form.convertToData('.page-current #userPay');
-		promocode = $f7.form.convertToData('.page-current #promocode');
 
-		$f7.preloader.show();
+            if (valid == true) {
+                $f7.request.postJSON(apiServer + 'user/savedata', formDataUser).then(function (res) {
+                    if (res.data) {
+                        if (res.data.error) {
+                            $f7.preloader.hide();
+                            $store.dispatch('msgalert', {
+                                err: res.data.error
+                            });
+                        } else {
+                            $f7.preloader.hide();
+                            $f7.store.dispatch('toast', {
+                                text: 'Контактные данные - Сохранено.'
+                            });
+                        }
 
-		createsub['period'] = userPeriod;
-		createsub['pay'] = userPay;
-		createsub['promocode'] = promocode;
-		console.log(createsub);
+                    } else {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                    }
 
-		uZooID = $f7.form.convertToData('.page-current #configZooID');
-		uConcierge = $f7.form.convertToData('.page-current #configConcierge');
-		createsub['configZooID'] = uZooID;
-		createsub['configConcierge'] = uConcierge;
+                });
+                $f7.request.postJSON(apiServer + 'user/savedataaddress', formAddressUser).then(function (res) {
+                    if (res.data) {
+                        if (res.data.error) {
+                            $f7.preloader.hide();
+                            $store.dispatch('msgalert', {
+                                err: res.data.error
+                            });
+                        } else {
+                            $f7.preloader.hide();
+                            $f7.store.dispatch('toast', {
+                                text: 'Адрес - Сохранено.'
+                            });
+                        }
 
-		console.log(createsub);
+                    } else {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                    }
 
-		fetch(apiServer+'subscribe/bay', {
-			method: 'POST',
-			body: JSON.stringify(createsub),
-			headers: headers()
-		})
-		.then((res) => res.json())
-		.then(function (data) {
-			if(data.err){
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {
-					err: data.err
-				});
-				$f7.views.main.router.navigate({ name: 'subscription' });
-			} else {
-				$f7.preloader.hide();
-					if(data.bepaid){
-						var params = {
-							checkout_url: "https://checkout.bepaid.by",
-							checkout: {
-								iframe: true,
-								test: true,
-								transaction_type: "payment",
-								public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxdu8Uij5KhA0Sn71cUkoStXkBQjsGvh7dCt4N0QcCJqVW4NrM8qnEVUAU8edhTVl17B9kHVKPiqOKSkyUMrbBgaGEggyR+Pe/3ohqcZGyd+BPDsLX2AQjye7L6lv15eqDTDNM7KV81rfN1vIxWuHJt7Zjagn2oOKMQbA9U0QJHn5HgLhORA+eKM49VnIyvLL4edVsNkrYqzHlpFalDCKuBc+CHZrXvJbCBO/idirNOHSFVYgAVfQtLgwwCTV0DBWdY3P/vVPiuICaQ4fxClyJzguy5TnUm1mZqsgBGOCrTEvJzRKHGO+Z/DonDO/qHeeuQ4f1OnWInV7kXDStJ1NUwIDAQAB",
-								order: {
-									amount: data.sum,
-									currency: data.currency,
-									description: "Оформление подписки",
-									tracking_id: data.bepaid
-								},
-							},
-							closeWidget: function(status) {
-								if(status == 'successful'){
-									$store.dispatch('msgalert', {err: 'Подписка успешно оформлена'});
-									$f7.views.main.router.navigate({ name: 'subscription' });
-								}
-								if(status == 'failed'){
-									$store.dispatch('msgalert', {
-										err: 'Оплата не была произведена'
-									});
-								}
-								if(status == 'pending'){
-									$store.dispatch('msgalert', {
-										err: 'Пожалуйста подождите завершения обработки платежа.'
-									});
-								}
-							  // возможные значения status
-							  // successful - операция успешна
-							  // failed - операция не успешна
-							  // pending - ожидаем результат/подтверждение операции
-							  // redirected - пользователь отправлен на внешнюю платежную систему
-							  // error - ошибка (в параметрах/сети и тд)
-							  // null - виджет закрыли без запуска оплаты
-							  console.debug('close widget callback')
-							}
-						};
-						new BeGateway(params).createWidget();
-					}
-					if(data.sub == 1){
-						$store.dispatch('msgalert', {err: 'Подписка успешно оформлена'});
-						$f7.views.main.router.navigate({ name: 'subscription' });
-					} else {
-					}
-				}
+                });
+                var formData = $f7.form.convertToData('.page-current #userPets');
+                $f7.request.postJSON(apiServer + 'user/savedatapets', formData).then(function (res) {
+                    if (res.data) {
+                        if (res.data.error) {
+                            $f7.preloader.hide();
+                            $store.dispatch('msgalert', {
+                                err: res.data.error
+                            });
+                        } else {
+                            $f7.preloader.hide();
+                            $f7.store.dispatch('toast', {
+                                text: 'Информация о питомце - Сохранено'
+                            });
+                        }
 
-			});
+                    } else {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {err: 'Техническая ошибка. Попробуйте позже.'});
+                    }
 
-	}
-	$on("pageInit", function (e, page) {
-		$store.dispatch('checkToken').then(function(checkToken) {
-			if(checkToken == true){
-				profile = $store.state.profile;
-				address = $store.state.address;
-				pets = $store.state.pets;
-				if(pets.age){
-					$store.dispatch('getNoun',{
-						number: pets.age,
-						one: 'год',
-						two: 'года',
-						five: 'лет'
-					}).then(function(text) {
-						if(text){
-							pets.ageText = pets.age+' '+text;
-							$f7.range.setValue('#userPets .petsAge', pets.age)
-							$update();
-						}
-					});
-				}
+                });
 
-				$update();
-				$f7.preloader.hide();
-			}
-		});
-	});
+                $store.dispatch('checkToken').then(function (checkToken) {
+                    if (checkToken == true) {
+                        profile = $store.state.profile;
+                        address = $store.state.address;
+                        pets = $store.state.pets;
+                        if (pets.age) {
+                            $store.dispatch('getNoun', {
+                                number: pets.age,
+                                one: 'год',
+                                two: 'года',
+                                five: 'лет'
+                            }).then(function (text) {
+                                if (text) {
+                                    pets.ageText = pets.age + ' ' + text;
+                                    $f7.range.setValue('#userPets .petsAge', pets.age)
+                                    $update();
+                                }
+                            });
+                        }
 
-	$on('pageAfterIn', (e, page) => {
-		fetch(apiServer+'subscribe/status', {
-			method: 'POST',
-			body: JSON.stringify(),
-			headers: headers()
-		})
-		.then((res) => res.json())
-		.then(function (data) {
-			if(data.err){
-				$f7.preloader.hide();
-				$store.dispatch('msgalert', {
-					err: data.err
-				});
-			} else {
-				configs = data.configs;
-				zooIDConf = configs.zooid;
-				conciergeConf = configs.concierge;
-				$update();
-				setTimeout(() => {
-					getPrice();
-				}, "2000");
+                        $update();
+                        $f7.preloader.hide();
+                    }
+                });
 
-			}
-		});
-	});
-    return $render;
-}
+                let createsub = {};
+
+                userPeriod = $f7.form.convertToData('.page-current #userPeriod');
+                userPay = $f7.form.convertToData('.page-current #userPay');
+                promocode = $f7.form.convertToData('.page-current #promocode');
+
+                $f7.preloader.show();
+
+                createsub['period'] = userPeriod;
+                createsub['pay'] = userPay;
+                createsub['promocode'] = promocode;
+                console.log(createsub);
+
+                uZooID = $f7.form.convertToData('.page-current #configZooID');
+                uConcierge = $f7.form.convertToData('.page-current #configConcierge');
+                createsub['configZooID'] = uZooID;
+                createsub['configConcierge'] = uConcierge;
+
+                console.log(createsub);
+
+                fetch(apiServer + 'subscribe/bay', {
+                    method: 'POST',
+                    body: JSON.stringify(createsub),
+                    headers: headers()
+                })
+                    .then((res) => res.json())
+                    .then(function (data) {
+                        if (data.err) {
+                            $f7.preloader.hide();
+                            $store.dispatch('msgalert', {
+                                err: data.err
+                            });
+                            $f7.views.main.router.navigate({name: 'subscription'});
+                        } else {
+                            $f7.preloader.hide();
+                            if (data.bepaid) {
+                                var params = {
+                                    checkout_url: "https://checkout.bepaid.by",
+                                    checkout: {
+                                        iframe: true,
+                                        test: true,
+                                        transaction_type: "payment",
+                                        public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxdu8Uij5KhA0Sn71cUkoStXkBQjsGvh7dCt4N0QcCJqVW4NrM8qnEVUAU8edhTVl17B9kHVKPiqOKSkyUMrbBgaGEggyR+Pe/3ohqcZGyd+BPDsLX2AQjye7L6lv15eqDTDNM7KV81rfN1vIxWuHJt7Zjagn2oOKMQbA9U0QJHn5HgLhORA+eKM49VnIyvLL4edVsNkrYqzHlpFalDCKuBc+CHZrXvJbCBO/idirNOHSFVYgAVfQtLgwwCTV0DBWdY3P/vVPiuICaQ4fxClyJzguy5TnUm1mZqsgBGOCrTEvJzRKHGO+Z/DonDO/qHeeuQ4f1OnWInV7kXDStJ1NUwIDAQAB",
+                                        order: {
+                                            amount: data.sum,
+                                            currency: data.currency,
+                                            description: "Оформление подписки",
+                                            tracking_id: data.bepaid
+                                        },
+                                    },
+                                    closeWidget: function (status) {
+                                        if (status == 'successful') {
+                                            $store.dispatch('msgalert', {err: 'Подписка успешно оформлена'});
+                                            $f7.views.main.router.navigate({name: 'subscription'});
+                                        }
+                                        if (status == 'failed') {
+                                            $store.dispatch('msgalert', {
+                                                err: 'Оплата не была произведена'
+                                            });
+                                        }
+                                        if (status == 'pending') {
+                                            $store.dispatch('msgalert', {
+                                                err: 'Пожалуйста подождите завершения обработки платежа.'
+                                            });
+                                        }
+                                        // возможные значения status
+                                        // successful - операция успешна
+                                        // failed - операция не успешна
+                                        // pending - ожидаем результат/подтверждение операции
+                                        // redirected - пользователь отправлен на внешнюю платежную систему
+                                        // error - ошибка (в параметрах/сети и тд)
+                                        // null - виджет закрыли без запуска оплаты
+                                        console.debug('close widget callback')
+                                    }
+                                };
+                                new BeGateway(params).createWidget();
+                            }
+                            if (data.sub == 1) {
+                                $store.dispatch('msgalert', {err: 'Подписка успешно оформлена'});
+                                $f7.views.main.router.navigate({name: 'subscription'});
+                            } else {
+                            }
+                        }
+
+                    });
+            } else {
+                $store.dispatch('msgalert', {err: 'Заполните обязательные поля'});
+                $f7.preloader.hide();
+            }
+
+        }
+
+        $on("pageInit", function (e, page) {
+            if (!$f7.form.getFormData('token')) {
+                location.href = '/login'
+            }
+
+            $store.dispatch('checkToken').then(function (checkToken) {
+                if (checkToken == true) {
+                    profile = $store.state.profile;
+                    address = $store.state.address;
+                    pets = $store.state.pets;
+                    if (pets.age) {
+                        $store.dispatch('getNoun', {
+                            number: pets.age,
+                            one: 'год',
+                            two: 'года',
+                            five: 'лет'
+                        }).then(function (text) {
+                            if (text) {
+                                pets.ageText = pets.age + ' ' + text;
+                                $f7.range.setValue('#userPets .petsAge', pets.age)
+                                $update();
+                            }
+                        });
+                    }
+
+                    $update();
+                    $f7.preloader.hide();
+                }
+            });
+        });
+
+        $on('pageAfterIn', (e, page) => {
+            fetch(apiServer + 'subscribe/status', {
+                method: 'POST',
+                body: JSON.stringify(),
+                headers: headers()
+            })
+                .then((res) => res.json())
+                .then(function (data) {
+                    if (data.err) {
+                        $f7.preloader.hide();
+                        $store.dispatch('msgalert', {
+                            err: data.err
+                        });
+                    } else {
+                        configs = data.configs;
+                        zooIDConf = configs.zooid;
+                        conciergeConf = configs.concierge;
+                        $update();
+                        setTimeout(() => {
+                            getPrice();
+                        }, "2000");
+
+                    }
+                });
+        });
+        return $render;
+    }
 </script>

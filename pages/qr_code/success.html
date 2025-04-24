@@ -1,0 +1,43 @@
+<template>
+    <div class="page auth">
+        <div class="nav" style="padding: 20px 20px 0;">
+            <div>
+                <a class="logo" @click=${closeToHome}><img src="/assets/logo_white.png" style="width: 50px"/></a>
+            </div>
+        </div>
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-100 small-100 medium-100 large-100 xlarge-100" style="box-sizing: border-box;display: flex;flex: 0 0 auto;flex-direction: column;gap: 15px;align-items: center;justify-content: flex-start;">
+                        <h1 style="box-sizing: border-box;    flex: 0 0 auto;    width: 430px;    padding: 0;margin: 0;    font: 400 40px / 45px Stratos LC Web;    color: #161616;    text-align: center;    letter-spacing: -0.6px;">Cпасибо за ваше обращение!</h1>
+                        <h1 style="box-sizing: border-box;flex: 0 0 auto;width: 430px;    padding: 0;    margin: 0;    font: 400 18px / 25px Stratos LC Web;    color: #161616;    text-align: center;    letter-spacing: -0.27px;">
+                            Менеджер сервиса свяжется с вами в ближайшее время</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $f7router,
+        $el,
+        $update,
+        $on,
+        $onBeforeMount,
+        $onMounted,
+        $onBeforeUpdate,
+        $onUpdated,
+        $onBeforeUnmount,
+        $onUnmounted,
+        $store,
+        $context
+    }) => {
+        function closeToHome() {
+            location.href = '/'
+        }
+        return $render;
+    }
+</script>

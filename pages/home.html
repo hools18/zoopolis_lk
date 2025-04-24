@@ -14,21 +14,14 @@ export default (props, { $f7, $f7router, $el, $update, $on, $onBeforeMount, $onM
 	$on('pageAfterIn', function (e, page) {
         if($f7.form.getFormData('token')){
             $store.dispatch('checkToken').then(function(checkToken) {
-                console.log($store.state.profile)
                 if(!$store.state.profile.hasSubscribe) {
-                    $f7router.navigate({
-                        name: 'select_city'
-                    });
+                    location.href = '/select-subscription'
                 } else {
-                    $f7router.navigate({
-                        name: 'main'
-                    });
+                    location.href = '/main'
                 }
             });
 		} else {
-			$f7router.navigate({
-				name: 'login'
-			});
+            location.href = '/login'
 		}
     });
 
